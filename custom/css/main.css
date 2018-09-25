@@ -5,6 +5,7 @@
   --bg-main-color: #002080;
   --bg-main-color: #00134d;
   --bg-main-color: #000d33;
+  --bg-main-color: #212529;
   /* --bg-main-color: #1e9099; */
   /* --bg-main-color: #4eb256; */
   /* /* --bg-main-color: #635808; */
@@ -19,6 +20,57 @@ body{
   font-size: 0.9em !important;
   background-color:rgba(0,0,0,0.03);
 }
+
+.side-nav{
+  width: 250px;
+  /* position: fixed;
+  left: 0;
+  top: 0; */
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+  z-index: 10;
+  height: 100vh;
+  float: left;
+  overflow-y: auto;
+  padding-top: 20px;
+}
+.main-content{
+  width: calc(100% - 250px);
+  float: right;
+}
+
+.side-nav .list-group-custom{
+  background-color: #212529;
+}
+
+.list-group-custom .list-group-item{
+  padding: 10px 20px!important;
+  border: none!important;
+  background-color: var(--bg-main-color);
+  transition: all 0.3s ease-in-out;
+}
+
+.list-group-custom .list-group-item:hover{
+  background-color: rgba(0,0,0,0.5);
+}
+
+.list-group-custom .list-group-item a{
+  color: #ffffff;
+}
+
+@media(max-width: 1000px){
+  .side-nav{
+    /* margin-left: -250px; */
+    position: fixed;
+    left: -250px;
+    top: 0;
+  }
+  .main-content{
+    width: 100%;
+  }
+  
+}
+
 .checkbox-custom{
   width: 16px;
   height: 16px;

@@ -1,5 +1,7 @@
 $(() => {
   $('#btnShowChamCongTbl').click(showChamCong);
+  $('.sidenav').sidenav();
+  
 })
 
 function resetTblChamCong() {
