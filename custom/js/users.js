@@ -31,18 +31,18 @@ function renderTblUsersList(users) {
   )
   if (users) {
     users.forEach((user) => {
-      const { FirstName, LogicalCode, Name, IDNumber, TypeUser, CreationDate, ValidityDate, Deparment } = user;
+      const { sFirstName, sLogicalCode, sLastName, sIdNumber, iTypeUser, dCreationDate, dValidityDate, sDepartmentName } = user;
       //const { date, timezone, timezone_type } = ValidityDate;
       $tbody.append(`
         <tr>
-		      <td>${IDNumber}</td>
-		      <td>${LogicalCode}</td>
-          <td>${FirstName}</td>
-          <td>${Name}</td>
-          <td>${TypeUser}</td>
-          <td>${Deparment}</td>
-          <td>${CreationDate}</td>
-		      <td>${ValidityDate}</td>
+		      <td>${sIdNumber}</td>
+		      <td>${sLogicalCode}</td>
+          <td>${sFirstName}</td>
+          <td>${sLastName}</td>
+          <td>${iTypeUser}</td>
+          <td>${sDepartmentName}</td>
+          <td>${dCreationDate}</td>
+		      <td>${dValidityDate}</td>
         </tr>
       `)
     })
