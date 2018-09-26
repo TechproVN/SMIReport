@@ -37,6 +37,9 @@ body{
   float: left;
   overflow-y: auto;
   padding-top: 20px;
+  position: fixed;
+  left: -260px;
+  top: 50px;
 }
 
 .side-nav .left-content-treeview{
@@ -78,7 +81,7 @@ body{
 }
 
 .main-content{
-  width: calc(100% - 300px);
+  width: calc(100% - 40px);
   float: right;
   transition: all 0.3s;
 }
@@ -87,37 +90,9 @@ body{
   background-color: #212529;
 }
 
-.list-group-custom .list-group-item{
-  padding: 10px 20px!important;
-  border: none!important;
-  background-color: var(--bg-main-color);
-  transition: all 0.3s ease-in-out;
-}
-
 .treeview .list-group-item{
   background-color:var(--bg-main-color)!important;
   color: white;
-}
-
-.list-group-custom .list-group-item:hover{
-  background-color: rgba(0,0,0,0.5);
-}
-
-.list-group-custom .list-group-item a{
-  color: #ffffff;
-}
-
-@media(max-width: 1000px){
-  .side-nav{
-    /* margin-left: -250px; */
-    position: fixed;
-    left: -260px;
-    top: 0;
-  }
-
-  .main-content{
-    width: calc(100% - 30px)!important;
-  }
 }
 
 .checkbox-custom{

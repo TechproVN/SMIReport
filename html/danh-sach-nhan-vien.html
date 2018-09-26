@@ -9,9 +9,6 @@
   <!-- font awesome css -->
   <link rel="stylesheet" href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css">
 
-  <!-- materialize css -->
-  <!-- <link rel="stylesheet" href="../plugins/materialize/css/materialize.min.css"> -->
-
   <!-- Bootstrap core css -->
   <link rel="stylesheet" href="../MDB Free/css/bootstrap.min.css">
 
@@ -32,7 +29,7 @@
   <!-- main view custom css -->
   <link rel="stylesheet" href="../custom/css/main.css">
 
-  <title>Test</title>
+  <title>Danh sách nhân viên</title>
 
   <style>
    
@@ -53,137 +50,139 @@
   </header> -->
 
   <nav class="navbar navbar-expand-lg bg-main-color white-text" style="padding-top: 0; padding-bottom: 0">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <i class="fa fa-shield icon-custom" style="color: whitesmoke"></i>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fa fa-bars icon-custom" style="color: white"></i>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="">
-                <i class="fa fa-th-list"></i> Danh sách nhân viên
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="">
-                <i class="fa fa-th-list"></i> Danh sách tức thòi
-              </a>
-            </li>
-        
-            <li class="nav-item active-menu-item">
-              <a class="nav-link" href="">
-                <i class="fa fa-star"></i> Báo cáo thòi gian ra vào
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="">
-                <i class="fa fa-star"></i>Báo cáo tức thòi
-              </a>
-            </li>
-          </ul>
-        </div>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <i class="fa fa-shield icon-custom" style="color: whitesmoke"></i>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars icon-custom" style="color: white"></i>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="danh-sach-nhan-vien.html">
+              <i class="fa fa-th-list"></i> Danh sách nhân viên
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="danh-sach-tuc-thoi.html">
+              <i class="fa fa-th-list"></i> Danh sách tức thòi
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="fa fa-star"></i> Báo cáo thòi gian ra vào
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="fa fa-star"></i> Báo cáo tức thòi
+            </a>
+          </li>
+        </ul>
       </div>
+    </div>
   </nav>
   <div class="wrapper mt-3">
-      <div class="side-nav">
-         
-          <div class="float-left bg-main-color left-content-treeview pt-3"> 
-            <div id="jstree_demo_div">
-              <ul>
-                <li>Root node 1</li>
-                <li>Root node 2</li>
-                <li>
-                  Children
-                  <ul>
-                    <li>Child 1</li>
-                    <li>Child 3</li>
-                    <li>GrandChildren
-                      <ul>
-                        <li>GrandChild 1</li>
-                        <li>GrandChild 2</li>
-                        <li>GrandChild 3</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="float-left right-content-cog">
-            <span class="cog"><i class="fa fa-cog"></i>
-            </span>
-          </div>
-      </div>
-    
-      <div class="main-content">
-        <div class="container-fluid">
-  
-            <div class="row my-3 row-custom">
-            
-              <div class="col-12">
-                <div class="card card-chamCong">
-                  <div class="card-header bg-main-color custom-card-header">
-                    <h4>
-                      <i class="fa fa-exclamation-triangle"></i> Danh sách nhân viên</h4>
-                  </div>
-                  <div class="card-body custom-card-body">
-                    <div class="row my-3">
-                      <div class="col-sm-8">
-                        <div id="pagingControl">
-
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div id="pagingTotal">
+    <div class="side-nav">
         
-                        </div>
+        <div class="float-left bg-main-color left-content-treeview pt-3"> 
+          <div id="jstree_demo_div">
+            <ul>
+              <li>Root node 1</li>
+              <li>Root node 2</li>
+              <li>
+                Children
+                <ul>
+                  <li>Child 1</li>
+                  <li>Child 3</li>
+                  <li>GrandChildren
+                    <ul>
+                      <li>GrandChild 1</li>
+                      <li>GrandChild 2</li>
+                      <li>GrandChild 3</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="float-left right-content-cog">
+          <span class="cog"><i class="fa fa-cog"></i>
+          </span>
+        </div>
+    </div>
+  
+    <div class="main-content">
+      <div class="container-fluid">
+
+          <div class="row my-3 row-custom">
+          
+            <div class="col-12">
+              <div class="card card-chamCong">
+                <div class="card-header bg-main-color custom-card-header">
+                  <h4>
+                    <i class="fa fa-exclamation-triangle"></i> Danh sách nhân viên
+                  </h4>
+                </div>
+                <div class="card-body custom-card-body">
+                  <div class="row my-3">
+                    <div class="col-sm-8">
+                      <div id="pagingControl">
+
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label>Tên nhân viên</label>
-                          <input type="text" class="form-control form-control-sm" placeholder="Nhập tên nhân viên...">
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label>Mã nhân viên</label>
-                          <input type="text" class="form-control form-control-sm" placeholder="Nhập mã nhân viên...">
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label>Vụ</label>
-                          <select class="form-control form-control-sm selectSuperDep" id="selectSuperDep">
-                            
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label>Phòng</label>
-                          <select class="form-control form-control-sm selectDep" id="selectDep">
-                            
-                          </select>
-                        </div>
+                    <div class="col-sm-4">
+                      <div id="pagingTotal">
+      
                       </div>
                     </div>
-                    <div class="table-responsive" id="usersListArea">
-                       
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Tên nhân viên</label>
+                        <input type="text" class="form-control form-control-sm" placeholder="Nhập tên nhân viên..." id="txtFilterUserName">
+                      </div>
                     </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Mã nhân viên</label>
+                        <input type="text" class="form-control form-control-sm" placeholder="Nhập mã nhân viên..." id="txtFilterUserID">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Vụ</label>
+                        <select class="form-control form-control-sm selectSuperDep" id="selectSuperDep">
+                          
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Phòng</label>
+                        <select class="form-control form-control-sm selectDep" id="selectDep">
+                          
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-responsive" id="usersListArea">
+                      
                   </div>
                 </div>
               </div>
             </div>
-        </div>
+          </div>
       </div>
+    </div>
   </div>
+
+  <!-- modal update user -->
   <div class="row">
     <div class="col-12">
       <div class="modal fade" id="modalUpdateUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -237,12 +236,39 @@
       </div>
     </div>
   </div>
-    
-  
-  
 
-  <!-- Google Map API -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2JtN93nl-xarvyDCUu5QOVtFNMJk0S-A"></script>
+  <!-- modal inout list -->
+  <div class="row">
+    <div class="col-12">
+      <div class="modal fade" id="modalInOutList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title trn">Danh sách ra vào</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-striped table-condensed text-center custom-table" id="tblInOutList">
+                      
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-custom bg-main-color trn" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- JQuery core -->
   <script src="../MDB Free/js/jquery-3.3.1.min.js"></script>
@@ -262,6 +288,9 @@
   <!-- datetimepicker js -->
   <script src="../plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
+  <!-- sweetalert js -->
+  <script src="../plugins/sweetalert/js/sweetalert.min.js"></script>
+
   <!-- pagination js -->
   <script src="../plugins/paginationJs/pagination.min.js"></script>
 
@@ -273,9 +302,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
   
-  <!-- validation js -->
-  <script src="../custom/js/validation.js"></script>
-
   <!-- main js -->
   <script src="../custom/js/main.js"></script>
 
@@ -285,6 +311,8 @@
   <!-- services -->
   <script src="../custom/js/services/common.service.js"></script>
   <script src="../custom/js/services/alert.service.js"></script>
+  <script src="../custom/js/services/time.service.js"></script>
+  <script src="../custom/js/services/validation.service.js"></script>
   <script src="../custom/js/services/user.service.js"></script>
   <script src="../custom/js/services/position.service.js"></script>
   <script src="../custom/js/services/department.service.js"></script>
