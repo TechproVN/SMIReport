@@ -18,6 +18,8 @@
   <!-- Meterial Design Bootstrap -->
   <link rel="stylesheet" href="../MDB Free/css/mdb.min.css">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
   <!-- datepicker css -->
   <link rel="stylesheet" href="../plugins/bootstrap-datetimepicker/css/bootstrap-datepicker3.min.css">
 
@@ -31,11 +33,15 @@
   <link rel="stylesheet" href="../custom/css/main.css">
 
   <title>Test</title>
+
+  <style>
+   
+  </style>
 </head>
 
 <body>
 
-  <header class="py-4 bg-main-color">
+  <!-- <header class="py-4 bg-main-color">
     <div class="row">
       <div class="col-md-7">
         <h2 class="text-white pl-2">Quản lý ra vào và chấm công</h2>
@@ -44,122 +50,182 @@
         <img src="" alt="" class="img-fluid">
       </div>
     </div>
-  </header>
-  
-  <div class="side-nav bg-main-color">
-    <ul class="list-group list-group-custom">
-      <li class="list-group-item">
-        <a href="danh-sach-nhan-vien.html">Danh sách nhân viên</a>
-      </li>
-      <li class="list-group-item">
-        <a href="">Danh sách tức thòi</a>
-      </li>
-      <li class="list-group-item">
-        <a href="">Báo cáo thòi gian ra vào</a>
-      </li>
-      <li class="list-group-item">
-        <a href="">Báo cáo tức thòi</a>
-      </li>
-    </ul>
-  </div>
-  <div class="main-content">
-    <div class="container-fluid">
+  </header> -->
 
-        <div class="row my-3 row-custom">
-         
-          <div class="col-12">
-            <div class="card card-chamCong">
-              <div class="card-header bg-main-color custom-card-header">
-                <h4>
-                  <i class="fa fa-exclamation-triangle"></i> Danh sách nhân viên</h4>
-              </div>
-              <div class="card-body custom-card-body">
-                <!-- <div class="row">
-                  <div class="col-12">
-                    <div class="text-center font-weight-bold green-text" style="font-size: 1.2em"></div>
-                  </div>
-                </div> -->
-                <!-- <div class="row my-3">
-                  <div class="col-sm-8">
-                    <div id="pagingChamCongControl"></div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div id="totalChamCong">
+  <nav class="navbar navbar-expand-lg bg-main-color white-text" style="padding-top: 0; padding-bottom: 0">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <i class="fa fa-shield icon-custom" style="color: whitesmoke"></i>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa fa-bars icon-custom" style="color: white"></i>
+        </button>
     
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <i class="fa fa-th-list"></i> Danh sách nhân viên
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <i class="fa fa-th-list"></i> Danh sách tức thòi
+              </a>
+            </li>
+        
+            <li class="nav-item active-menu-item">
+              <a class="nav-link" href="">
+                <i class="fa fa-star"></i> Báo cáo thòi gian ra vào
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <i class="fa fa-star"></i>Báo cáo tức thòi
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </nav>
+  <div class="wrapper mt-3">
+      <div class="side-nav">
+          <!-- <ul class="list-group list-group-custom">
+            
+          </ul> -->
+          <div class="float-left bg-main-color left-content-treeview pt-3"> 
+            <div id="jstree_demo_div">
+              <ul>
+                <li>Root node 1</li>
+                <li>Root node 2</li>
+                <li>
+                  Children
+                  <ul>
+                    <li>Child 1</li>
+                    <li>Child 3</li>
+                    <li>GrandChildren
+                      <ul>
+                        <li>GrandChild 1</li>
+                        <li>GrandChild 2</li>
+                        <li>GrandChild 3</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="float-left right-content-cog">
+            <span class="cog"><i class="fa fa-cog"></i>
+            </span>
+          </div>
+        
+    
+      </div>
+    
+      <div class="main-content">
+        <div class="container-fluid">
+  
+            <div class="row my-3 row-custom">
+            
+              <div class="col-12">
+                <div class="card card-chamCong">
+                  <div class="card-header bg-main-color custom-card-header">
+                    <h4>
+                      <i class="fa fa-exclamation-triangle"></i> Danh sách nhân viên</h4>
+                  </div>
+                  <div class="card-body custom-card-body">
+                    <!-- <div class="row">
+                      <div class="col-12">
+                        <div class="text-center font-weight-bold green-text" style="font-size: 1.2em"></div>
+                      </div>
+                    </div> -->
+                    <!-- <div class="row my-3">
+                      <div class="col-sm-8">
+                        <div id="pagingChamCongControl"></div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div id="totalChamCong">
+        
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Tên nhân viên</label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Nhập tên nhân viên...">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Mã nhân viên</label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Nhập mã nhân viên...">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Vụ</label>
+                            <select class="form-control form-control-sm">
+                              <option value="">Vụ 1</option>
+                              <option value="">Vụ 2</option>
+                              <option value="">Vụ 3</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Phòng</label>
+                            <select class="form-control form-control-sm">
+                              <option value="">Phòng 1</option>
+                              <option value="">Phòng 2</option>
+                              <option value="">Phòng 3</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped table-condensed text-center custom-table">
+                            <thead>
+                              <tr>
+                                <th>STT</th>
+                                <th>Họ Tên</th>
+                                <th>Mã nhân viên</th>
+                                <th>Chức vụ</th>
+                                <th>Phòng ban</th>
+                                <th>Vụ</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td>Bui Duc Tai</td>
+                                <td>SE12345</td>
+                                <td>Giám đốc</td>
+                                <td>Quản lý</td>
+                                <td>Quản lý</td>
+                                <td>
+                                  <button class="btn btn-custom btn-success" style="margin: 0">Xem ra vào</button>
+                                  <button class="btn btn-custom btn-warning" style="margin: 0">
+                                    <i class="fa fa-pencil-alt"></i>Cập nhật
+                                  </button>
+                                </td>
+                              </tr>
+                            </tbody>
+                        </table>
                     </div>
                   </div>
-                </div> -->
-                <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Tên nhân viên</label>
-                        <input type="text" class="form-control" placeholder="Nhập tên nhân viên...">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Mã nhân viên</label>
-                        <input type="text" class="form-control" placeholder="Nhập mã nhân viên...">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Vụ</label>
-                        <select class="form-control">
-                          <option value="">Vụ 1</option>
-                          <option value="">Vụ 2</option>
-                          <option value="">Vụ 3</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Phòng</label>
-                        <select class="form-control">
-                          <option value="">Phòng 1</option>
-                          <option value="">Phòng 2</option>
-                          <option value="">Phòng 3</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped table-condensed text-center custom-table">
-                        <thead>
-                          <tr>
-                            <th>STT</th>
-                            <th>Họ Tên</th>
-                            <th>Mã nhân viên</th>
-                            <th>Chức vụ</th>
-                            <th>Phòng ban</th>
-                            <th>Vụ</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Bui Duc Tai</td>
-                            <td>SE12345</td>
-                            <td>Giám đốc</td>
-                            <td>Quản lý</td>
-                            <td>Quản lý</td>
-                            <td>
-                              <button class="btn btn-custom btn-success" style="margin: 0">Xem ra vào</button>
-                              <button class="btn btn-custom btn-warning" style="margin: 0">Cập nhật</button>
-                            </td>
-                          </tr>
-                        </tbody>
-                    </table>
                 </div>
               </div>
             </div>
-          </div>
+        
         </div>
-    
-    </div>
+      </div>
   </div>
-  <!-- navbar end -->
+    
+  
   
 
   <!-- Google Map API -->
@@ -192,6 +258,11 @@
   <!-- translate js plugins -->
   <script src="../plugins/translate.js-master/jquery.translate.js"></script>
 
+  <!-- bootstrap tree view js -->
+  <script src="../plugins/TreeViewBootstrap/js/bootstrap-treeview.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
   <!-- validation js -->
   <script src="../custom/js/validation.js"></script>
 
@@ -206,7 +277,15 @@
 
   <!-- custom incident js -->
   <!-- <script src="../custom/js/chamCongNhanVien.js"></script> -->
+  <script>
+    $('#jstree_demo_div').jstree();
 
+    $('#jstree_demo_div').on("changed.jstree", function (e, data) {
+      console.log(data.selected);
+    });
+  </script>
+
+  <script src="../custom/js/sidenav.js"></script>
 
 </body>
 

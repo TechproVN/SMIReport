@@ -21,11 +21,15 @@ body{
   background-color:rgba(0,0,0,0.03);
 }
 
+.wrapper{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .side-nav{
-  width: 250px;
-  /* position: fixed;
-  left: 0;
-  top: 0; */
+  width: 300px;
   color: #ffffff;
   transition: all 0.3s ease-in-out;
   z-index: 10;
@@ -34,9 +38,49 @@ body{
   overflow-y: auto;
   padding-top: 20px;
 }
+
+.side-nav .left-content-treeview{
+  height: 100%;
+  float: left;
+  width: 260px;
+}
+
+.side-nav .right-content-cog{
+  width: 40px; 
+  position: relative;
+  top: 0;
+  height: 100%;
+  /* display: none; */
+  background-color: transparent!important;
+}
+
+.side-nav .right-content-cog .cog{
+  width: 40px;
+  height: 40px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: var(--bg-main-color);
+  text-align: center;
+  line-height: 40px;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  color: #ffffff;
+  font-size: 2em;
+  cursor: pointer;
+}
+.side-nav .right-content-cog .cog i{
+  transition: all 0.3s;
+}
+.side-nav .right-content-cog .cog i:hover{
+  transform: rotate(90deg);
+  color: gray;
+}
+
 .main-content{
-  width: calc(100% - 250px);
+  width: calc(100% - 300px);
   float: right;
+  transition: all 0.3s;
 }
 
 .side-nav .list-group-custom{
@@ -48,6 +92,11 @@ body{
   border: none!important;
   background-color: var(--bg-main-color);
   transition: all 0.3s ease-in-out;
+}
+
+.treeview .list-group-item{
+  background-color:var(--bg-main-color)!important;
+  color: white;
 }
 
 .list-group-custom .list-group-item:hover{
@@ -62,13 +111,13 @@ body{
   .side-nav{
     /* margin-left: -250px; */
     position: fixed;
-    left: -250px;
+    left: -260px;
     top: 0;
   }
+
   .main-content{
-    width: 100%;
+    width: calc(100% - 30px)!important;
   }
-  
 }
 
 .checkbox-custom{
