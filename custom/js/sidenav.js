@@ -19,5 +19,4 @@ function toggleSidenav(e){
       $mainContent.css({width: 'calc(100% - 300px)'});
     }
   }
-  
 }
