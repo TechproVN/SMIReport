@@ -91,9 +91,7 @@
   </nav>
   <div class="wrapper mt-3">
       <div class="side-nav">
-          <!-- <ul class="list-group list-group-custom">
-            
-          </ul> -->
+         
           <div class="float-left bg-main-color left-content-treeview pt-3"> 
             <div id="jstree_demo_div">
               <ul>
@@ -120,8 +118,6 @@
             <span class="cog"><i class="fa fa-cog"></i>
             </span>
           </div>
-        
-    
       </div>
     
       <div class="main-content">
@@ -189,49 +185,58 @@
       </div>
   </div>
   <div class="row">
-      <div class="col-12">
-        <div class="modal fade" id="modalUpdateAsset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-super-lg-custom" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title trn">Update Asset</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  
-                  <div class="col-12">
-                   
-                    <div class="form-group">
-                      <label for="" class="font-weight-bold">Route</label>
-                      <select id="selectRouteUpdateAsset" class="form-control selectRoutes">
+    <div class="col-12">
+      <div class="modal fade" id="modalUpdateUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title trn">Cập nhật nhân viên</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="font-weight-bold">Họ</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Nhập họ tên.." id="txtFirstNameUpdateUser">
+                  </div>
+                  <div class="form-group">
+                    <label class="font-weight-bold">Tên</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Nhập họ tên.." id="txLastNameUpdateUser">
+                  </div>
+                  <div class="form-group">
+                    <label class="font-weight-bold">Chức vụ</label>
+                    <select id="selectPosUpdate" class="form-control form-control-sm selectPos">
 
-                      </select>
-                    </div>
-                    <div>
-                      <label for="" class="font-weight-bold">Lat: </label>
-                      <span id="latUpdateAsset" class="latAsset"></span>
-                    </div>
-                    <div>
-                      <label for="" class="font-weight-bold">Long: </label>
-                      <span id="longUpdateAsset" class="longAsset"></span>
-                    </div>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Vụ</label>
+                    <select class="form-control form-control-sm selectSuperDep" id="selectSuperDepUpdate">
+                      
+                    </select>
+                  </div>
+                  <div class="form-group">
+                  <label>Phòng</label>
+                    <select class="form-control form-control-sm selectDep selectDepUpdate" id="selectDepUpdate">
+                      
+                    </select>
                   </div>
                 </div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-custom bg-main-color trn" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-custom bg-main-color trn" id="btnUpdateAsset">Save</button>
               </div>
             </div>
-
+            <div class="modal-footer">
+              <button type="button" class="btn btn-custom bg-main-color trn" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-custom bg-main-color trn" id="btnUpdateAsset">Save</button>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
+  </div>
     
   
   
@@ -251,9 +256,6 @@
   <!-- Meterail Design Bootstrap JS -->
   <script src="../MDB Free/js/mdb.min.js"></script>
 
-  <!-- materialize js -->
-  <script src="../plugins/materialize/js/materialize.min.js"></script>
-
   <!-- bootstrap datepicker js -->
   <script src="../plugins/bootstrap-datetimepicker/js/bootstrap-datepicker.min.js"></script>
 
@@ -269,8 +271,8 @@
   <!-- bootstrap tree view js -->
   <script src="../plugins/TreeViewBootstrap/js/bootstrap-treeview.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
+  
   <!-- validation js -->
   <script src="../custom/js/validation.js"></script>
 
@@ -290,15 +292,9 @@
 
   <!-- select components -->
   <script src="../custom/js/components/select.component.js"></script>
-  <!-- custom incident js -->
-  <!-- <script src="../custom/js/chamCongNhanVien.js"></script> -->
-  <script>
-    
-  </script>
 
+  <!-- sidenav js -->
   <script src="../custom/js/sidenav.js"></script>
-
-  
 
   <!-- danh-sach-nhan-vien js -->
   <script src="../custom/js/danh-sach-nhan-vien.js"></script>

@@ -7,9 +7,17 @@ $(async () => {
     console.log(data.selected);
   });
 
-  $('#selectSuperDep').change(showDepList);
+  $('#selectSuperDep').change(e => {
+    showDepList(e);
+  });
+
+  $('#selectSuperDepUpdate').change((e) => {
+    showDepList(e, 'selectDepUpdate');
+  });
+
   arrSuperDep = await SelectComponent.renderSuperDepartment();
-  showDepList();
+  showDepListWhenLoad();
+  arrPos = await SelectComponent.renderPosition();
   
   showEmployeesListTable();
 
@@ -17,11 +25,19 @@ $(async () => {
 
 let arrSuperDep = [];
 let arrDep = [];
+let arrPos = [];
+let currentUser = null;
 
-function showDepList(){
+function showDepList(e, className){
+  let superDepID = e.target.value;
+  let sentData = {iSuperDepartmentID: superDepID};
+  SelectComponent.renderDepartment(sentData, className);
+}
+
+function showDepListWhenLoad(){
   let superDepID = $('#selectSuperDep').val();
   let sentData = {iSuperDepartmentID: superDepID};
-  arrDep = SelectComponent.renderDepartment(sentData);
+  SelectComponent.renderDepartment(sentData);
 }
 
 function renderUsersTbl(data) {
@@ -74,7 +90,18 @@ function renderUsersTbl(data) {
 
 function showUpdateModalUser(user){
   console.log(user);
+  fillFormUser(user);
+  currentUser = user;
   $('#modalUpdateUser').modal('show');
+}
+
+function fillFormUser(user){
+  let { sFirstName, sLastName, iSuperDepartmentID, iDepartmentID, iPositionID } = user;
+  $('#txtFirstNameUpdateUser').val(sFirstName);
+  $('#txtLastNameUpdateUser').val(sLastName);
+  $('#selectPosUpdate').val(iPositionID);
+  $('#selectDepUpdate').val(iDepartmentID);
+  $('#selectSuperDepUpdate').val(iSuperDepartmentID);
 }
 
 function clearFormUser(){
