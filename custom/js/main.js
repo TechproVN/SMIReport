@@ -1,6 +1,7 @@
 const APP_DOMAIN = 'http://115.79.27.219/';
 const CENTER_POS_MAP_VIEW = [20.81715284, 106.77411238];
 const TIME_OUT_SHOW_MAP_ON_MODAL = 0;
+const arrMonths = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
 
 $('.datepicker').datepicker();
 

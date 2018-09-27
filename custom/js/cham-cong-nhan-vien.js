@@ -14,7 +14,7 @@ $(async () => {
       filterUserData();
     }, 200);
   });
-
+  SelectComponent.renderMonths();
   await SelectComponent.renderSuperDepartment();
   SelectComponent.renderPosition();
   showDepListWhenLoad();

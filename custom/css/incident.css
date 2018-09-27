@@ -1,9 +1,0 @@
-#modalIncidentImage .modal-dialog{
-  max-width: 30%;
-}
-
-@media(max-width: 800px){
-  #modalIncidentImage .modal-dialog{
-    max-width: 50%;
-  }
-}

@@ -56,7 +56,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="cham-cong-nhan-vien.html">
                   <i class="fa fa-star"></i> Báo cáo thòi gian ra vào
                 </a>
               </li>
@@ -125,18 +125,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Tên nhân viên</label>
-                      <input type="text" class="form-control form-control-sm" placeholder="Nhập tên nhân viên..." id="txtFilterUserName">
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Mã nhân viên</label>
-                      <input type="text" class="form-control form-control-sm" placeholder="Nhập mã nhân viên..." id="txtFilterUserID">
-                    </div>
-                  </div>
+                  
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Vụ</label>
@@ -153,7 +142,32 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label class="font-weight-bold">Tháng</label>
+                    <select name="" id="" class="form-control form-control-sm selectMonth"></select>
+                  </div>
+                </div> 
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label class="font-weight-bold">Năm</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Nhập năm">
+                  </div>
+                </div> 
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label class="font-weight-bold">Giờ làm việc</label>
+                    <div class="row">
+                      <div class="col">
+                        <input type="text" class="form-control form-control-sm" placeholder="Giờ">
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control form-control-sm" placeholder="Phút">
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                  <!-- <div class="col-md-3">
                     <div class="form-group">
                       <label >Từ ngày</label>
                       <br>
@@ -166,7 +180,7 @@
                         <br>
                         <input type="text" readonly class="form-control form-control-sm datepicker" style="width: 100%" id="toDateTime">
                     </div>
-                  </div>
+                  </div> -->
                   <div class="col-md-3">
                     <div class="form-group">
                       <button class="btn btn-custom bg-main-color mt-4" id="btnViewAttendance">Xem</button>

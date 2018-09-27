@@ -15,6 +15,8 @@ $(async () => {
     filterUserData(true);
   })
 
+  $btnInDanhSachTrongToaNha.click(printUserList);
+
   showOnSiteList();
 
   await SelectComponent.renderSuperDepartment();
@@ -25,7 +27,9 @@ $(async () => {
 
 let $selectSuperDep = $('#selectSuperDep');
 let $selectDep = $('#selectDep');
+let $btnInDanhSachTrongToaNha = $('#btnInDanhSachTrongToaNha');
 let arrOnSites = [];
+let arrFilteredOnSites = [];
 
 function showDepListWhenLoad(){
   let superDepID = $('#selectSuperDep').val();
@@ -42,11 +46,9 @@ function showDepList(e, className){
 function filterUserData(filterByDepID){
   let depID = $selectDep.val();
   let superDepID = $selectSuperDep.val();
-  let arr;
-  if(filterByDepID)
-    arr = FilterService.filterByUserDepID(arrOnSites, depID);
-  else arr = FilterService.filterByUserSuperDepID(arrOnSites, superDepID);
-  showPagination(arr);
+  if(filterByDepID) arrFilteredOnSites = FilterService.filterByUserDepID(arrOnSites, depID);
+  else arrFilteredOnSites = FilterService.filterByUserSuperDepID(arrOnSites, superDepID);
+  showPagination(arrFilteredOnSites);
 }
 
 function renderTblOnsiteList(data) {
@@ -68,7 +70,6 @@ function renderTblOnsiteList(data) {
   )
   if (data) {
     data.forEach((item, index) => {
-      console.log(item);
       const { sDepartmentName, sFirstName, sIdNumber, sLastName, sLogicalCode, sPositionName, sSubDepartmentName, sSuperDepartmentName } = item;
       let fullname = sFirstName + ' ' + sLastName;
       $tbody.append(`
@@ -91,7 +92,12 @@ function renderTblOnsiteList(data) {
 
 async function showOnSiteList() {
   arrOnSites = await UserService.getOnSite();
-  if (!arrOnSites) AlertSẻvice.showAlertError("Không có dữ liệu", '', 4000);
+
+  if (!arrOnSites) {
+    AlertSẻvice.showAlertError("Không có dữ liệu", '', 4000);
+    arrFilteredOnSites = arrOnSites.slice();
+  }
+  arrFilteredOnSites = [];
   showPagination(arrOnSites);
 }
 
@@ -114,4 +120,48 @@ function clearPagination(){
   $('#pagingTotal').html('');
   $('#pagingControl').html('');
   $('#onSiteListArea').html('');
+}
+
+function renderTblPrintOnsiteList(data){
+  let $table = $(`#tblPrintUsers`);
+  let $thead = $('<thead></thead>');
+  let $tbody = $('<tbody></tbody>');
+  $thead.html(
+    `
+    <tr>
+      <th class="font-weight-bold">Họ tên</th>
+      <th class="font-weight-bold">Mã nhân viên</th>
+      <th class="font-weight-bold">Chức vụ</th>
+      <th class="font-weight-bold">Phòng ban</th>
+      <th class="font-weight-bold">Vụ</th>
+      <th class="trn">Bộ ĐK</th>
+    </tr>
+    `
+  )
+  if (data) {
+    data.forEach((item, index) => {
+      const { sDepartmentName, sFirstName, sIdNumber, sLastName, sLogicalCode, sPositionName, sSubDepartmentName, sSuperDepartmentName } = item;
+      let fullname = sFirstName + ' ' + sLastName;
+      $tbody.append(`
+        <tr>
+          <td>${fullname}</td>
+          <td>${sIdNumber}</td>
+          <td>${sPositionName}</td>
+          <td>${sDepartmentName}</td>
+          <td>${sSuperDepartmentName}</td>
+          <td>${sSubDepartmentName}</td>
+          <td></td>
+        </tr>
+      `)
+    })
+  }
+
+  $table.append($thead).append($tbody);
+}
+
+function printUserList(){
+  renderTblPrintOnsiteList(arrFilteredOnSites);
+  let $table = $('#tblPrintUsers');
+  let filename = "danh-sach-tuc-thoi";
+  Export2ExcelService.export2Excel($table, filename);
 }
