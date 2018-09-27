@@ -9,9 +9,7 @@ $(async () => {
 
   $selectSuperDep.change(e => {
     showDepList(e);
-    setTimeout(() => {
-      filterUserData();
-    }, 200);
+    filterUserData(false);
   });
 
   $btnUpdateUser.click(updateUser);
@@ -20,9 +18,15 @@ $(async () => {
     showDepList(e, 'selectDepUpdate');
   });
 
-  $txtFilterUserName.on('input', filterUserData);
-  $txtFilterUserID.on('input', filterUserData);
-  $selectDep.change(filterUserData);
+  $txtFilterUserName.on('input', () => {
+    filterUserData(true);
+  });
+  $txtFilterUserID.on('input', () => {
+    filterUserData(true);
+  });
+  $selectDep.change(() => {
+    filterUserData(true);
+  });
 
   await SelectComponent.renderSuperDepartment();
   SelectComponent.renderPosition();
@@ -48,7 +52,7 @@ let $btnUpdateUser = $('#btnUpdateUser');
 
 function showDepList(e, className){
   let superDepID = e.target.value;
-  let sentData = {iSuperDepartmentID: superDepID};
+  let sentData = { iSuperDepartmentID: superDepID };
   SelectComponent.renderDepartment(sentData, className);
 }
 
@@ -70,8 +74,9 @@ function fillFormUser(user){
   $('#txtLastNameUpdateUser').val(sLastName);
   $('#txtIDNumberUpdateUser').val(sIdNumber);
   $('#selectPosUpdate').val(iPositionID);
-  $('#selectDepUpdate').val(iDepartmentID);
   $('#selectSuperDepUpdate').val(iSuperDepartmentID);
+  $('#selectSuperDepUpdate').trigger('change');
+  $('#selectDepUpdate').val(iDepartmentID);
 }
 
 function checkUserinput(sFirstName, sLastName, sIdNumber){
@@ -92,7 +97,6 @@ function checkUserinput(sFirstName, sLastName, sIdNumber){
   return { valid, errMsg };
 }
 
-
 async function updateUser(){
   let { sLogicalCode } = currentUser;
   let sFirstName = $('#txtFirstNameUpdateUser').val();
@@ -108,11 +112,16 @@ async function updateUser(){
   AlertService.showAlertSuccess('Cập nhật thành công', '', 4000);
 }
 
-function filterUserData(){
+function filterUserData(filterByDepID){
   let name = $txtFilterUserName.val();
   let id = $txtFilterUserID.val();
   let depID = $selectDep.val();
-  let arr1 = FilterService.filterByUserDepID(arrUsers, depID);
+  let superDepID = $selectSuperDep.val();
+  let arr1;
+  if(filterByDepID) 
+    arr1 = FilterService.filterByUserDepID(arrUsers, depID);
+  else 
+    arr1 = FilterService.filterByUserSuperDepID(arrUsers, superDepID);
   let arr2 = FilterService.filterByUserID(arr1, id);
   let arr3 = FilterService.filterByUserName(arr2, name);
   showPagination(arr3);

@@ -27,5 +27,12 @@ class FilterService{
       return depID == iDepartmentID;
     })
   }
-  
+
+  static filterByUserSuperDepID(arr, superDepID){
+    return arr.filter(user => {
+      let { iSuperDepartmentID } = user;
+      return superDepID == iSuperDepartmentID;
+    })
+  }
+
 }

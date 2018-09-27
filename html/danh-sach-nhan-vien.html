@@ -118,66 +118,64 @@
   
     <div class="main-content">
       <div class="container-fluid">
-
-          <div class="row my-3 row-custom">
-          
-            <div class="col-12">
-              <div class="card card-chamCong">
-                <div class="card-header bg-main-color custom-card-header">
-                  <h4>
-                    <i class="fa fa-exclamation-triangle"></i> Danh sách nhân viên
-                  </h4>
+        <div class="row my-3 row-custom">
+          <div class="col-12">
+            <div class="card card-chamCong">
+              <div class="card-header bg-main-color custom-card-header">
+                <h4>
+                  <i class="fa fa-exclamation-triangle"></i> Danh sách nhân viên
+                </h4>
+              </div>
+              <div class="card-body custom-card-body">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold">Tên nhân viên</label>
+                      <input type="text" class="form-control form-control-sm" placeholder="Nhập tên nhân viên..." id="txtFilterUserName">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold">Mã nhân viên</label>
+                      <input type="text" class="form-control form-control-sm" placeholder="Nhập mã nhân viên..." id="txtFilterUserID">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold">Vụ</label>
+                      <select class="form-control form-control-sm selectSuperDep" id="selectSuperDep">
+                        
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="font-weight-bold">Phòng</label>
+                      <select class="form-control form-control-sm selectDep" id="selectDep">
+                        
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <div class="card-body custom-card-body">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label class="font-weight-bold">Tên nhân viên</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Nhập tên nhân viên..." id="txtFilterUserName">
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label class="font-weight-bold">Mã nhân viên</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Nhập mã nhân viên..." id="txtFilterUserID">
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label class="font-weight-bold">Vụ</label>
-                        <select class="form-control form-control-sm selectSuperDep" id="selectSuperDep">
-                          
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label class="font-weight-bold">Phòng</label>
-                        <select class="form-control form-control-sm selectDep" id="selectDep">
-                          
-                        </select>
-                      </div>
+                <div class="table-responsive" id="usersListArea">
+                    
+                </div>
+                <div class="row my-3">
+                  <div class="col-sm-4">
+                    <div id="pagingTotal" class="pull-right">
+    
                     </div>
                   </div>
-                  <div class="table-responsive" id="usersListArea">
-                      
-                  </div>
-                  <div class="row my-3">
-                    <div class="col-sm-4">
-                      <div id="pagingTotal" class="pull-right">
-      
-                      </div>
-                    </div>
-                    <div class="col-sm-8" style="text-align: right">
-                      <div id="pagingControl" class="pull-right">
+                  <div class="col-sm-8" style="text-align: right">
+                    <div id="pagingControl" class="pull-right">
 
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
