@@ -195,8 +195,8 @@ function renderUsersTbl(data) {
           <td>${sDepartmentName}</td>
           <td>${sPositionName}</td>
           <td>
-            <button class="btn btn-custom bg-main-color btn-view-inout" style="margin: 5px 0; text-transform: none;">Xem ra vào</button>
-            <button class="btn btn-custom bg-main-color btn-update" style="margin: 0; text-transform: none;">Cập nhật</button>
+            <button class="btn btn-custom btn-view-inout" style="margin: 5px 0; text-transform: none;background-color: #6785b2">Xem ra vào</button>
+            <button class="btn btn-custom btn-update" style="margin: 0; text-transform: none; background-color: #353e4c">Cập nhật</button>
           </td>
         </tr>
       `)
