@@ -27,7 +27,16 @@
   <!-- main view custom css -->
   <link rel="stylesheet" href="../custom/css/main.css">
 
+  <style>
+    @media(max-width: 760px){
+      #btnInDanhSachTrongToaNha{
+        margin-top: 0!important;
+      }
+    }
+    
+  </style>
   <title>Danh sách tức thời</title>
+
 </head>
 
 <body>
@@ -124,18 +133,6 @@
                   <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label>Tên nhân viên</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Nhập tên nhân viên..." id="txtFilterUserName">
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label>Mã nhân viên</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Nhập mã nhân viên..." id="txtFilterUserID">
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
                         <label>Vụ</label>
                         <select class="form-control form-control-sm selectSuperDep" id="selectSuperDep">
                           
@@ -149,6 +146,15 @@
                           
                         </select>
                       </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Số người có trong tòa nhà</label>
+                        <input type="text" class="form-control form-control-sm" placeholder="Nhập sô người..." >
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <button class="btn btn-custom bg-main-color" style="margin-top: 27px; text-transform: none" id="btnInDanhSachTrongToaNha">In danh sách có trong tòa nhà</button>
                     </div>
                   </div>
                   <div class="table-responsive" id="onSiteListArea">
@@ -200,6 +206,7 @@
   <script src="../custom/js/services/alert.service.js"></script>
   <script src="../custom/js/services/time.service.js"></script>
   <script src="../custom/js/services/validation.service.js"></script>
+  <script src="../custom/js/services/filter.service.js"></script>
   <script src="../custom/js/services/user.service.js"></script>
   <script src="../custom/js/services/position.service.js"></script>
   <script src="../custom/js/services/department.service.js"></script>

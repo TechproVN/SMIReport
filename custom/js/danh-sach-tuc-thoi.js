@@ -1,16 +1,46 @@
 $(async () => {
+
+  $('#jstree_demo_div').jstree();
+
+  $('#jstree_demo_div').on("changed.jstree", function (e, data) {
+    console.log(data.selected);
+  });
+
+  $selectSuperDep.change(e => {
+    showDepList(e);
+    setTimeout(() => {
+      filterUserData(e)
+    }, 200);
+  });
+
   showOnSiteList();
 
   await SelectComponent.renderSuperDepartment();
+  SelectComponent.renderPosition();
+  showDepListWhenLoad();
 
 })
 
+let $selectSuperDep = $('#selectSuperDep');
+let $selectDep = $('#selectDep');
 let arrOnSites = [];
 
-function clearPagination(){
-  $('#pagingTotal').html('');
-  $('#pagingControl').html('');
-  $('#onSiteListArea').html('');
+function showDepListWhenLoad(){
+  let superDepID = $('#selectSuperDep').val();
+  let sentData = { iSuperDepartmentID: superDepID };
+  SelectComponent.renderDepartment(sentData);
+}
+
+function showDepList(e, className){
+  let superDepID = e.target.value;
+  let sentData = {iSuperDepartmentID: superDepID};
+  SelectComponent.renderDepartment(sentData, className);
+}
+
+function filterUserData(e){
+  let val = $selectDep.val();
+  let arr = FilterService.filterByUserDepID(arrOnSites, val);
+  showPagination(arr);
 }
 
 function renderTblOnsiteList(data) {
@@ -55,14 +85,13 @@ function renderTblOnsiteList(data) {
 
 async function showOnSiteList() {
   arrOnSites = await UserService.getOnSite();
-  console.log(arrOnSites);
-  if (!arrOnSites) AlertSẻvice.showAlertError("Không có dữ liệu", "", 3000);
+  if (!arrOnSites) AlertSẻvice.showAlertError("Không có dữ liệu", '', 4000);
   showPagination(arrOnSites);
 }
 
 function showPagination(data){
   if(!data) return clearPagination();
-  $('#pagingTotal').html(`<strong>Tổng số dòng:</strong> ${data.length}`)
+  $('#pagingTotal').html(`<strong>Tổng số nhân viên:</strong> ${data.length}`)
   $('#pagingControl').pagination({
     dataSource: data,
     pageSize: 10,
@@ -73,4 +102,10 @@ function showPagination(data){
       $('#onSiteListArea.table-responsive').html($table);
     }
   })
+}
+
+function clearPagination(){
+  $('#pagingTotal').html('');
+  $('#pagingControl').html('');
+  $('#onSiteListArea').html('');
 }

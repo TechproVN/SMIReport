@@ -14,6 +14,8 @@ $(async () => {
     }, 200);
   });
 
+  $btnUpdateUser.click(updateUser);
+
   $('#selectSuperDepUpdate').change((e) => {
     showDepList(e, 'selectDepUpdate');
   });
@@ -42,6 +44,7 @@ let $selectSuperDep = $('#selectSuperDep');
 let $selectDep = $('#selectDep');
 let $tblInOutList = $('#tblInOutList');
 let $modalInOutList = $('#modalInOutList');
+let $btnUpdateUser = $('#btnUpdateUser');
 
 function showDepList(e, className){
   let superDepID = e.target.value;
@@ -56,57 +59,63 @@ function showDepListWhenLoad(){
 }
 
 function showUpdateModalUser(user){
-  console.log(user);
-  fillFormUser(user);
   currentUser = user;
+  fillFormUser(user);
   $('#modalUpdateUser').modal('show');
 }
 
 function fillFormUser(user){
-  let { sFirstName, sLastName, iSuperDepartmentID, iDepartmentID, iPositionID } = user;
+  let { sFirstName, sLastName, iSuperDepartmentID, iDepartmentID, iPositionID, sIdNumber } = user;
   $('#txtFirstNameUpdateUser').val(sFirstName);
-  $('#txLastNameUpdateUser').val(sLastName);
+  $('#txtLastNameUpdateUser').val(sLastName);
+  $('#txtIDNumberUpdateUser').val(sIdNumber);
   $('#selectPosUpdate').val(iPositionID);
   $('#selectDepUpdate').val(iDepartmentID);
   $('#selectSuperDepUpdate').val(iSuperDepartmentID);
+}
+
+function checkUserinput(sFirstName, sLastName, sIdNumber){
+  let valid = true;
+  let errMsg = '';
+  if(!ValidationService.checkNotEmpty(sFirstName)){
+    valid = false;
+    errMsg += 'Họ không đuọc dể trống\n';
+  }
+  if(!ValidationService.checkNotEmpty(sLastName)){
+    valid = false;
+    errMsg += 'Tên không đuọc dể trống\n';
+  }
+  if(!ValidationService.checkNotEmpty(sIdNumber)){
+    valid = false;
+    errMsg += 'Mã nhân viên không đuọc dể trống\n';
+  }
+  return { valid, errMsg };
+}
+
+
+async function updateUser(){
+  let { sLogicalCode } = currentUser;
+  let sFirstName = $('#txtFirstNameUpdateUser').val();
+  let sLastName = $('#txtLastNameUpdateUser').val();
+  let sIdNumber = $('#txtIDNumberUpdateUser').val();
+  let iPositionID = $('#selectPosUpdate').val();
+  let iDepartmentID = $('#selectDepUpdate').val();
+  let iSuperDepartmentID = $('#selectSuperDepUpdate').val();
+  let { valid, errMsg } = checkUserinput(sFirstName, sLastName, sIdNumber);
+  if(!valid) return AlertService.showAlertError('Dũ liệu không đúng', errMsg);
+  let sentData = { sLogicalCode, sLastName, sFirstName, sIdNumber, iSuperDepartmentID, iDepartmentID, iPositionID };
+  let res = await UserService.updateUser(sentData);
+  AlertService.showAlertSuccess('Cập nhật thành công', '', 4000);
 }
 
 function filterUserData(){
   let name = $txtFilterUserName.val();
   let id = $txtFilterUserID.val();
   let depID = $selectDep.val();
-  let arr1 = filterByUserDepID(arrUsers, depID);
-  let arr2 = filterByUserID(arr1, id);
-  let arr3 = filterByUserName(arr2, name);
+  let arr1 = FilterService.filterByUserDepID(arrUsers, depID);
+  let arr2 = FilterService.filterByUserID(arr1, id);
+  let arr3 = FilterService.filterByUserName(arr2, name);
   showPagination(arr3);
-}
-
-function filterByUserName(arr, filterVal){
-  if(!ValidationService.checkNotEmpty(filterVal)) return arr;
-  return arr.filter(user => {
-    let {sLastName, sFirstName} = user;
-    let fullname = sFirstName + ' ' + sLastName;
-    fullname = CommonService.removeUnicode(fullname).toLowerCase();
-    filterVal = CommonService.removeUnicode(filterVal).toLowerCase();
-    return fullname.indexOf(filterVal) > -1;
-  })
-}
-
-function filterByUserID(arr, filterVal){
-  if(!ValidationService.checkNotEmpty(filterVal)) return arr;
-  return arr.filter(user => {
-    let { sIdNumber } = user;
-    sIdNumber = (sIdNumber+'').toLowerCase();
-    filterVal = CommonService.removeUnicode(filterVal).toLowerCase();
-    return sIdNumber.indexOf(filterVal) > -1;
-  })
-}
-
-function filterByUserDepID(arr, depID){
-  return arr.filter(user => {
-    let { iDepartmentID } = user;
-    return depID == iDepartmentID;
-  })
 }
 
 async function showInOutModal(user){
@@ -186,8 +195,8 @@ function renderUsersTbl(data) {
           <td>${sDepartmentName}</td>
           <td>${sPositionName}</td>
           <td>
-            <button class="btn btn-custom btn-success btn-view-inout" style="margin: 0; text-transform: capitalize;">Xem ra vào</button>
-            <button class="btn btn-custom btn-warning btn-update" style="margin: 0; text-transform: capitalize;">Cập nhật</button>
+            <button class="btn btn-custom bg-main-color btn-view-inout" style="margin: 5px 0; text-transform: none;">Xem ra vào</button>
+            <button class="btn btn-custom bg-main-color btn-update" style="margin: 0; text-transform: none;">Cập nhật</button>
           </td>
         </tr>
       `)

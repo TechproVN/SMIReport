@@ -48,4 +48,17 @@ class UserService{
     }
   }
 
+  static async updateUser(sentData) {
+    let url = `${APP_DOMAIN}SMIApi/UpdateUser.php`;
+    let method = 'post';
+    let data = JSON.stringify(sentData);
+    try {
+      let res = await $.ajax({ url, method, data });
+      return res;
+    } catch (error) {
+      return CommonService.handleError(error);
+    }
+  }
+
+
 }

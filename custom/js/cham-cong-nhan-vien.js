@@ -1,7 +1,41 @@
-$(() => {
+$(async () => {
+
+  $('#jstree_demo_div').jstree();
+
+  $('#jstree_demo_div').on("changed.jstree", function (e, data) {
+    console.log(data.selected);
+  });
+
   $('#btnViewAttendance').click(showAttendance);
   
+  $selectSuperDep.change(e => {
+    showDepList(e);
+    setTimeout(() => {
+      filterUserData();
+    }, 200);
+  });
+
+  await SelectComponent.renderSuperDepartment();
+  SelectComponent.renderPosition();
+  showDepListWhenLoad();
+
 })
+
+let $selectSuperDep = $('#selectSuperDep');
+let $selectDep = $('#selectDep');
+let arrOnSites = [];
+
+function showDepList(e, className){
+  let superDepID = e.target.value;
+  let sentData = {iSuperDepartmentID: superDepID};
+  SelectComponent.renderDepartment(sentData, className);
+}
+
+function showDepListWhenLoad(){
+  let superDepID = $('#selectSuperDep').val();
+  let sentData = {iSuperDepartmentID: superDepID};
+  SelectComponent.renderDepartment(sentData);
+}
 
 function renderTblAttendance(data) {
   let $table = $(`<table class="table table-hover table-striped table-condensed text-center custom-table"></table>`)
