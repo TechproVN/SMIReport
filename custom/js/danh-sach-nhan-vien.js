@@ -8,7 +8,7 @@ $(async () => {
   });
 
   $selectSuperDep.change(e => {
-    showDepList(e);
+    showDepList(e, null, true);
     filterUserData(false);
   });
 
@@ -21,14 +21,19 @@ $(async () => {
   $txtFilterUserName.on('input', () => {
     filterUserData(true);
   });
+
   $txtFilterUserID.on('input', () => {
     filterUserData(true);
   });
+
   $selectDep.change(() => {
     filterUserData(true);
   });
 
-  await SelectComponent.renderSuperDepartment();
+  $('#btnPrintUserList').click(printUserList);
+
+  await SelectComponent.renderSuperDepartment(null, true);
+  SelectComponent.renderSuperDepartment('selectSuperDepUpdate', false);
   SelectComponent.renderPosition();
   showDepListWhenLoad();
   
@@ -37,9 +42,12 @@ $(async () => {
 })
 
 let arrSuperDep = [];
+
 let arrDep = [];
 let arrPos = [];
 let arrUsers = [];
+let arrFilteredUsers = [];
+
 let currentUser = null;
 
 let $txtFilterUserName = $('#txtFilterUserName');
@@ -50,16 +58,16 @@ let $tblInOutList = $('#tblInOutList');
 let $modalInOutList = $('#modalInOutList');
 let $btnUpdateUser = $('#btnUpdateUser');
 
-function showDepList(e, className){
+function showDepList(e, className, all){
   let superDepID = e.target.value;
   let sentData = { iSuperDepartmentID: superDepID };
-  SelectComponent.renderDepartment(sentData, className);
+  SelectComponent.renderDepartment(sentData, className, all);
 }
 
 function showDepListWhenLoad(){
   let superDepID = $('#selectSuperDep').val();
   let sentData = {iSuperDepartmentID: superDepID};
-  SelectComponent.renderDepartment(sentData);
+  SelectComponent.renderDepartment(sentData, null, true);
 }
 
 function showUpdateModalUser(user){
@@ -118,13 +126,15 @@ function filterUserData(filterByDepID){
   let depID = $selectDep.val();
   let superDepID = $selectSuperDep.val();
   let arr1;
-  if(filterByDepID) 
-    arr1 = FilterService.filterByUserDepID(arrUsers, depID);
+  if(filterByDepID) {
+    if(depID == 0) arr1 = FilterService.filterByUserSuperDepID(arrUsers, superDepID);
+    else arr1 = FilterService.filterByUserSuperDepID(arrUsers, depID);
+  }
   else 
     arr1 = FilterService.filterByUserSuperDepID(arrUsers, superDepID);
   let arr2 = FilterService.filterByUserID(arr1, id);
-  let arr3 = FilterService.filterByUserName(arr2, name);
-  showPagination(arr3);
+  arrFilteredUsers = FilterService.filterByUserName(arr2, name);
+  showPagination(arrFilteredUsers);
 }
 
 async function showInOutModal(user){
@@ -171,6 +181,7 @@ function renderTblInOutList(data){
 async function showEmployeesListTable(){
   arrUsers = await UserService.getUsersData();
   if(!arrUsers) AlertService.showAlertError('Không có dữ liệu', '', 4000);
+  else arrFilteredUsers = arrUsers.slice();
   showPagination(arrUsers);
 }
 
@@ -241,4 +252,47 @@ function clearPagination(){
   $('#pagingTotal').html('');
   $('#pagingControl').html('');
   $('#usersListArea').html('');
+}
+
+function renderTblPrintUsersList(data){
+  let $table = $(`#tblPrintUsers`);
+  let $thead = $('<thead></thead>');
+  let $tbody = $('<tbody></tbody>');
+  $thead.html(
+    `
+    <tr>
+      <th class="font-weight-bold">STT</th>
+      <th class="font-weight-bold">Mã nhân viên</th>
+      <th class="font-weight-bold">Họ và tên</th>
+      <th class="font-weight-bold">Vụ</th>
+      <th class="font-weight-bold">Phòng ban</th>
+      <th class="font-weight-bold">Chức vụ</th>
+    </tr>
+    `
+  )
+  if (data) {
+    data.forEach((user, index) => {
+      const { sLastName, sFirstName, sIdNumber, sPositionName, sDepartmentName, sSuperDepartmentName, sSubDepartmentName } = user;
+      let fullname = sFirstName + ' ' + sLastName;
+      $tbody.append(`
+        <tr>
+          <td>${index + 1}</td>
+          <td>${sIdNumber}</td>
+          <td>${fullname}</td>
+          <td>${sSuperDepartmentName}</td>
+          <td>${sDepartmentName}</td>
+          <td>${sPositionName}</td>
+        </tr>
+      `)
+    })
+  }
+
+  $table.append($thead).append($tbody);
+}
+
+function printUserList(){
+  renderTblPrintUsersList(arrFilteredUsers);
+  let $table = $('#tblPrintUsers');
+  let filename = "danh-sach-nhan-vien";
+  Export2ExcelService.export2Excel($table, filename);
 }

@@ -22,6 +22,7 @@ class FilterService{
   }
   
   static filterByUserDepID(arr, depID){
+    if(depID == 0) return arr;
     return arr.filter(user => {
       let { iDepartmentID } = user;
       return depID == iDepartmentID;
@@ -29,6 +30,7 @@ class FilterService{
   }
 
   static filterByUserSuperDepID(arr, superDepID){
+    if(superDepID == 0) return arr;
     return arr.filter(user => {
       let { iSuperDepartmentID } = user;
       return superDepID == iSuperDepartmentID;

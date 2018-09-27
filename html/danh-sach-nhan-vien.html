@@ -160,6 +160,12 @@
                 <div class="table-responsive" id="usersListArea">
                     
                 </div>
+                <div class="row">
+                  <div class="col-12">
+                    <button class="btn btn-custom pull-right" id="btnPrintUserList" style="background-color: #4a5972;">In danh sách nhân viên</button>
+                  </div>
+                </div>
+                <!-- pagination -->
                 <div class="row my-3">
                   <div class="col-sm-4">
                     <div id="pagingTotal" class="pull-right">
@@ -209,7 +215,7 @@
                   </div>
                   <div class="form-group">
                     <label class="font-weight-bold">Vụ</label>
-                    <select class="form-control form-control-sm selectSuperDep" id="selectSuperDepUpdate">
+                    <select class="form-control form-control-sm selectSuperDep selectSuperDepUpdate" id="selectSuperDepUpdate">
                       
                     </select>
                   </div>
@@ -272,6 +278,39 @@
     </div>
   </div>
 
+  <!-- modal print users -->
+  <div class="row">
+    <div class="col-12">
+      <div class="modal fade" id="modalPrintUsers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title trn">Danh sách ra vào</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-striped table-condensed text-center custom-table" id="tblPrintUsers">
+                      
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-custom bg-main-color trn" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- JQuery core -->
   <script src="../MDB Free/js/jquery-3.3.1.min.js"></script>
 
@@ -299,6 +338,9 @@
   <!-- translate js plugins -->
   <script src="../plugins/translate.js-master/jquery.translate.js"></script>
 
+  <!-- table2Excel js -->
+  <script src="../plugins/Export-Html-Table-To-Excel-Spreadsheet-using-jQuery-table2excel/dist/jquery.table2excel.min.js"></script>
+
   <!-- bootstrap tree view js -->
   <script src="../plugins/TreeViewBootstrap/js/bootstrap-treeview.js"></script>
 
@@ -314,6 +356,7 @@
   <script src="../custom/js/services/common.service.js"></script>
   <script src="../custom/js/services/alert.service.js"></script>
   <script src="../custom/js/services/time.service.js"></script>
+  <script src="../custom/js/services/exportExcel.service.js"></script>
   <script src="../custom/js/services/validation.service.js"></script>
   <script src="../custom/js/services/filter.service.js"></script>
   <script src="../custom/js/services/user.service.js"></script>

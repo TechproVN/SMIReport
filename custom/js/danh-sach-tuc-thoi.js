@@ -8,10 +8,12 @@ $(async () => {
 
   $selectSuperDep.change(e => {
     showDepList(e);
-    setTimeout(() => {
-      filterUserData(e)
-    }, 200);
+    filterUserData(false);
   });
+
+  $selectDep.change(() => {
+    filterUserData(true);
+  })
 
   showOnSiteList();
 
@@ -37,9 +39,13 @@ function showDepList(e, className){
   SelectComponent.renderDepartment(sentData, className);
 }
 
-function filterUserData(e){
-  let val = $selectDep.val();
-  let arr = FilterService.filterByUserDepID(arrOnSites, val);
+function filterUserData(filterByDepID){
+  let depID = $selectDep.val();
+  let superDepID = $selectSuperDep.val();
+  let arr;
+  if(filterByDepID)
+    arr = FilterService.filterByUserDepID(arrOnSites, depID);
+  else arr = FilterService.filterByUserSuperDepID(arrOnSites, superDepID);
   showPagination(arr);
 }
 
