@@ -95,9 +95,9 @@ async function showOnSiteList() {
 
   if (!arrOnSites) {
     AlertSẻvice.showAlertError("Không có dữ liệu", '', 4000);
-    arrFilteredOnSites = arrOnSites.slice();
+    arrFilteredOnSites = [];
   }
-  arrFilteredOnSites = [];
+  arrFilteredOnSites = arrOnSites.slice();
   showPagination(arrOnSites);
 }
 
@@ -150,7 +150,6 @@ function renderTblPrintOnsiteList(data){
           <td>${sDepartmentName}</td>
           <td>${sSuperDepartmentName}</td>
           <td>${sSubDepartmentName}</td>
-          <td></td>
         </tr>
       `)
     })
@@ -161,6 +160,7 @@ function renderTblPrintOnsiteList(data){
 
 function printUserList(){
   renderTblPrintOnsiteList(arrFilteredOnSites);
+  // $('#modalPrintUsers').modal('show');
   let $table = $('#tblPrintUsers');
   let filename = "danh-sach-tuc-thoi";
   Export2ExcelService.export2Excel($table, filename);
