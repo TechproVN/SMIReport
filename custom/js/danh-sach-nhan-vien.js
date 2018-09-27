@@ -127,8 +127,8 @@ function renderTblInOutList(data){
     `
     <tr>
       <th>STT</th>
-      <th>Thời gian ra vào</th>
       <th>Họ tên</th>
+      <th>Thời gian ra vào</th>
       <th>SMI</th>
     </tr>
     `
@@ -140,8 +140,8 @@ function renderTblInOutList(data){
       $tbody.append(`
         <tr>
           <td>${index + 1}</td>
-          <td>${DateTimeInOut}</td>
           <td>${fullname}</td>
+          <td>${DateTimeInOut}</td>
           <td>${SMI}</td>
         </tr>
       `)
@@ -163,13 +163,13 @@ function renderUsersTbl(data) {
   $thead.html(
     `
     <tr>
-      <th>STT</th>
-      <th>Họ Tên</th>
-      <th>Mã nhân viên</th>
-      <th>Chức vụ</th>
-      <th>Phòng ban</th>
-      <th>Vụ</th>
-      <th></th>
+      <th class="font-weight-bold">STT</th>
+      <th class="font-weight-bold">Mã nhân viên</th>
+      <th class="font-weight-bold">Họ và tên</th>
+      <th class="font-weight-bold">Vụ</th>
+      <th class="font-weight-bold">Phòng ban</th>
+      <th class="font-weight-bold">Chức vụ</th>
+      <th class="font-weight-bold"></th>
     </tr>
     `
   )
@@ -180,11 +180,11 @@ function renderUsersTbl(data) {
       $tbody.append(`
         <tr>
           <td>${index + 1}</td>
-          <td>${fullname}</td>
           <td>${sIdNumber}</td>
-          <td>${sPositionName}</td>
-          <td>${sDepartmentName}</td>
+          <td>${fullname}</td>
           <td>${sSuperDepartmentName}</td>
+          <td>${sDepartmentName}</td>
+          <td>${sPositionName}</td>
           <td>
             <button class="btn btn-custom btn-success btn-view-inout" style="margin: 0; text-transform: capitalize;">Xem ra vào</button>
             <button class="btn btn-custom btn-warning btn-update" style="margin: 0; text-transform: capitalize;">Cập nhật</button>
