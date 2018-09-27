@@ -128,7 +128,7 @@ function filterUserData(filterByDepID){
   let arr1;
   if(filterByDepID) {
     if(depID == 0) arr1 = FilterService.filterByUserSuperDepID(arrUsers, superDepID);
-    else arr1 = FilterService.filterByUserSuperDepID(arrUsers, depID);
+    else arr1 = FilterService.filterByUserDepID(arrUsers, depID);
   }
   else 
     arr1 = FilterService.filterByUserSuperDepID(arrUsers, superDepID);
