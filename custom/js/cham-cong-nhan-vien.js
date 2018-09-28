@@ -14,6 +14,10 @@ $(async () => {
       filterUserData();
     }, 200);
   });
+
+  $txtEndTime.val('17:00');
+  $txtStartTime.val('08:00');
+
   SelectComponent.renderMonths();
   await SelectComponent.renderSuperDepartment();
   SelectComponent.renderPosition();
@@ -23,6 +27,8 @@ $(async () => {
 
 let $selectSuperDep = $('#selectSuperDep');
 let $selectDep = $('#selectDep');
+let $txtEndTime = $('#txtEndTime');
+let $txtStartTime = $('#txtStartTime');
 let arrOnSites = [];
 
 function showDepList(e, className){
@@ -61,28 +67,35 @@ function renderTblAttendance(data) {
 
       let { sLogicalCode, sFullname, Attendance } = user;
       let arrInOut = getInOutArr(Attendance);
-
+      let startStr = $txtStartTime.val();
+      let endStr = $txtEndTime.val();
       $tbody.append(`
         <tr>
           <td rowspan="2">${index + 1}</td>
           <td rowspan="2">${sFullname}</td>
-          <td>Ra</td>
+          <td>Đi trễ</td>
         </tr>
       `)
       arrInOut.forEach(item => {
-        let val = item.dTimeIN;
-        if(!val) val = '';
+        let val = '';
+        if(item.dTimeIN)  {
+          val = getTimeSpanString(item.dTimeIN, startStr);
+          if(!val) val = item.dTimeIN;
+        }
         $tbody.find('tr').last().append(`<td>${val}</td>`)
       })
 
       $tbody.append(`
         <tr>
-          <td>Vào</td>
+          <td>Về sớm</td>
         </tr>
       `)
       arrInOut.forEach(item => {
-        let val = item.dTimeOUT;
-        if(!val) val = '';
+        let val = '';
+        if(item.dTimeOUT)  {
+          val = getTimeSpanString(endStr, item.dTimeOUT);
+          if(!val) val = item.dTimeOUT;
+        }
         $tbody.find('tr').last().append(`<td>${val}</td>`)
       })
     })
@@ -104,19 +117,43 @@ function getInOutArr(data){
   return arrTemp;
 }
 
+function getTimeOfTimeStr(timeStr){
+  let arr = timeStr.split(':');
+  let hour = Number(arr[0].trim());
+  let min = Number(arr[1].trim());
+  let time = getTimeStamp(hour, min);
+  return time;
+}
+
+function getTimeStamp(hour, min){
+  return hour*3600 + min*60;
+}
+
+function getTimeSpanString(timeStr1, timeStr2){
+  let stamp1 = getTimeOfTimeStr(timeStr1);
+  let stamp2 = getTimeOfTimeStr(timeStr2);
+  let span = stamp1 - stamp2;
+  if(span <= 60) return null;
+  return getTimeStringFromSeconds(span);
+}
+
+function getTimeStringFromSeconds(sec){
+  if(sec < 60*60) return '00:' + sec/60;
+  if(sec < 60*60*24) return Math.floor(sec/3600) + ':' + (sec%3600)/60;
+}
+
 function getDayInMonth(){
   let arr = [];
   for(let i = 1; i <= 31; i++){
     arr.push(i);
   }
   return arr;
-  
 }
 
 async function showAttendance() {
   let iMonth = $('#selectMonth').val();
   let iYear = $('#txtYear').val();
-  if(!ValidationService.checkPositiveNumber(iYear)) return AlertService.showAlertSuccess('Năm không hợp lệ', '', 5000);
+  if(!ValidationService.checkPositiveNumber(iYear)) return AlertService.showAlertError('Năm không hợp lệ', '', 5000);
   let sentData = { iMonth, iYear };
   arrOnSites = await UserService.getAttendance(sentData);
   console.log(arrOnSites);
