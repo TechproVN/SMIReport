@@ -15,8 +15,8 @@ class TimeService{
   static changeFormatDateTime(time){
     let arr = time.split('/');
     let y = arr[2];
-    let d = arr[1];
-    let m = arr[0];
+    let m = arr[1];
+    let d = arr[0];
     return `${y}-${m}-${d}`;
   }
 

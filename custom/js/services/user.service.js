@@ -60,4 +60,16 @@ class UserService{
     }
   }
 
+  static async getOnSiteDate(sentData) {
+    let url = `${APP_DOMAIN}SMIApi/OnSiteDate.php`;
+    let method = 'post';
+    let data = JSON.stringify(sentData);
+    try {
+      let res = await $.ajax({ url, method, data });
+      return CommonService.handleData(res);
+    } catch (error) {
+      return CommonService.handleError(error);
+    }
+  }
+
 }

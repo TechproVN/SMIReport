@@ -155,9 +155,12 @@ async function showAttendance() {
   let iYear = $('#txtYear').val();
   let startStr = $txtStartTime.val();
   let endStr = $txtEndTime.val();
+  
   if(!ValidationService.checkPositiveNumber(iYear)) return AlertService.showAlertError('Năm không hợp lệ', '', 5000);
+
   let { valid, errMsg } = checkTimeInOutInput(startStr, endStr);
   if(!valid) return AlertService.showAlertError('Thời gian làm không đúng', errMsg);
+  
   let sentData = { iMonth, iYear };
   arrOnSites = await UserService.getAttendance(sentData);
   console.log(arrOnSites);
@@ -208,6 +211,7 @@ function showPagination(data){
 function clearPagination(){
   $('#pagingTotal').html('');
   $('#pagingControl').html('');
-  $('#attendanceDataArea').html('');
+  $('#chamCongArea').html('');
 }
+
 
