@@ -153,12 +153,41 @@ function getDayInMonth(){
 async function showAttendance() {
   let iMonth = $('#selectMonth').val();
   let iYear = $('#txtYear').val();
+  let startStr = $txtStartTime.val();
+  let endStr = $txtEndTime.val();
   if(!ValidationService.checkPositiveNumber(iYear)) return AlertService.showAlertError('Năm không hợp lệ', '', 5000);
+  let { valid, errMsg } = checkTimeInOutInput(startStr, endStr);
+  if(!valid) return AlertService.showAlertError('Thời gian làm không đúng', errMsg);
   let sentData = { iMonth, iYear };
   arrOnSites = await UserService.getAttendance(sentData);
   console.log(arrOnSites);
   if(!arrOnSites) AlertService.showAlertError('Không có dữ liệu', '', 4000);
   showPagination(arrOnSites);
+}
+
+function checkTimeInOutInput(start, end){
+  let valid = true;
+  let errMsg = '';
+  if(!checkFormatInOutTimeStr(start)){
+    valid = false;
+    errMsg += 'Thời gian làm bắt đầu không họp lệ\n';
+  }
+  if(!checkFormatInOutTimeStr(end)){
+    valid = false;
+    errMsg += 'Thời gian làm kết thúc không họp lệ\n';
+  }
+  return { valid, errMsg };
+}
+
+function checkFormatInOutTimeStr(timeStr){
+  let pattern = /^[0-9]{1,2}:[0-9]{1,2}$/;
+  if(!pattern.test(timeStr)) return false;
+  let arr = timeStr.split(':');
+  let hour = Number(arr[0]);
+  let min = Number(arr[1]);
+  if(hour > 23) return false;
+  if(min > 59) return false;
+  return true;
 }
 
 function showPagination(data){
