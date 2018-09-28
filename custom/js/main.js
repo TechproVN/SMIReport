@@ -3,10 +3,21 @@ const CENTER_POS_MAP_VIEW = [20.81715284, 106.77411238];
 const TIME_OUT_SHOW_MAP_ON_MODAL = 0;
 const arrMonths = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
 
-$('.datepicker').datepicker();
+$('.datepicker').datepicker({
+  todayBtn: "linked",
+  format: 'dd/mm/yyyy',
+  // autoclose: true,
+  // language: 'vn',
+  todayHighlight: true,
+});
 
 $('.datetimepicker').datetimepicker({
-  format: 'yyyy-mm-dd hh:ii'
+  format: 'dd/mm/yyyy hh:ii',
+  todayBtn: "linked",
+  // format: 'dd/mm/yyyy',
+  // autoclose: true,
+  // language: 'vn',
+  todayHighlight: true,
 })
 
 $('.datetimepicker-bootstrap4').datetimepicker({

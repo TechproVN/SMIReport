@@ -34,7 +34,7 @@ class ValidationService{
   }
   
   static checkPositiveNumber(val){
-    if(!ValidationService.checkIsNumber(val)) return false;
+    if(!ValidationService.checkBeNumber(val)) return false;
     if(Number(val) < 0) return false;
     return true;
   }

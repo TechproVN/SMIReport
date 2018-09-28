@@ -33,42 +33,42 @@
 
 <body>
   
-    <nav class="navbar navbar-expand-lg bg-main-color white-text" style="padding-top: 0; padding-bottom: 0">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <i class="fa fa-shield icon-custom" style="color: whitesmoke"></i>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa fa-bars icon-custom" style="color: white"></i>
-          </button>
-      
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="danh-sach-nhan-vien.html">
-                  <i class="fa fa-th-list"></i> Danh sách nhân viên
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="danh-sach-tuc-thoi.html">
-                  <i class="fa fa-th-list"></i> Danh sách tức thòi
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="cham-cong-nhan-vien.html">
-                  <i class="fa fa-star"></i> Báo cáo thòi gian ra vào
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">
-                  <i class="fa fa-star"></i> Báo cáo tức thòi
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
+  <nav class="navbar navbar-expand-lg bg-main-color white-text" style="padding-top: 0; padding-bottom: 0">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <i class="fa fa-shield icon-custom" style="color: whitesmoke"></i>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars icon-custom" style="color: white"></i>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="danh-sach-nhan-vien.html">
+              <i class="fa fa-th-list"></i> Danh sách nhân viên
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="danh-sach-tuc-thoi.html">
+              <i class="fa fa-th-list"></i> Danh sách tức thòi
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cham-cong-nhan-vien.html">
+              <i class="fa fa-star"></i> Báo cáo thòi gian ra vào
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="bao-cao-tuc-thoi.html">
+              <i class="fa fa-star"></i> Báo cáo tức thòi
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <div class="wrapper mt-3">
     <div class="side-nav">
@@ -112,20 +112,7 @@
                 </h4>
               </div>
               <div class="card-body custom-card-body">
-                <div class="row my-3">
-                  <div class="col-sm-8">
-                    <div id="pagingControl">
-
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div id="pagingTotal">
-    
-                    </div>
-                  </div>
-                </div>
                 <div class="row">
-                  
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Vụ</label>
@@ -142,31 +129,31 @@
                       </select>
                     </div>
                   </div>
-                <div class="col-md-2">
-                  <div class="form-group">
-                    <label class="font-weight-bold">Tháng</label>
-                    <select name="" id="" class="form-control form-control-sm selectMonth"></select>
-                  </div>
-                </div> 
-                <div class="col-md-2">
-                  <div class="form-group">
-                    <label class="font-weight-bold">Năm</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Nhập năm">
-                  </div>
-                </div> 
-                <div class="col-md-2">
-                  <div class="form-group">
-                    <label class="font-weight-bold">Giờ làm việc</label>
-                    <div class="row">
-                      <div class="col">
-                        <input type="text" class="form-control form-control-sm" placeholder="Giờ">
-                      </div>
-                      <div class="col">
-                        <input type="text" class="form-control form-control-sm" placeholder="Phút">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label class="font-weight-bold">Tháng</label>
+                      <select name="" id="selectMonth" class="form-control form-control-sm selectMonth"></select>
+                    </div>
+                  </div> 
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label class="font-weight-bold">Năm</label>
+                      <input type="text" class="form-control form-control-sm" placeholder="Nhập năm" id="txtYear">
+                    </div>
+                  </div> 
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label class="font-weight-bold">Giờ làm việc</label>
+                      <div class="row">
+                        <div class="col">
+                          <input type="text" class="form-control form-control-sm" placeholder="Giờ">
+                        </div>
+                        <div class="col">
+                          <input type="text" class="form-control form-control-sm" placeholder="Phút">
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div> 
+                  </div> 
                   <!-- <div class="col-md-3">
                     <div class="form-group">
                       <label >Từ ngày</label>
@@ -182,6 +169,14 @@
                     </div>
                   </div> -->
                   <div class="col-md-3">
+                    <label class="font-weight-bold">Loại PC</label>
+                    <select name="" id="" class="form-control form-control-sm">
+                      <option value="1">Báo cáo thòi gian ra vào</option>
+                      <option value="2">Báo cáo làm thêm giờ</option>
+                      <option value="3">Báo cáo đi muộn về sớm</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
                     <div class="form-group">
                       <button class="btn btn-custom bg-main-color mt-4" id="btnViewAttendance">Xem</button>
                     </div>
@@ -189,6 +184,19 @@
                 </div>
                 <div class="table-responsive" id="">
                     
+                </div>
+                <!-- pagination  -->
+                <div class="row my-3">
+                  <div class="col-sm-4">
+                    <div id="pagingTotal" class="pull-right">
+    
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <div id="pagingControl" class="pull-right">
+
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

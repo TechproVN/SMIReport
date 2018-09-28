@@ -19,10 +19,10 @@ $(async () => {
 
   showOnSiteList();
 
-  await SelectComponent.renderSuperDepartment();
+  await SelectComponent.renderSuperDepartment(null, true);
   SelectComponent.renderPosition();
-  showDepListWhenLoad();
-
+  // showDepListWhenLoad();
+  showDepListJustAll();
 })
 
 let $selectSuperDep = $('#selectSuperDep');
@@ -30,6 +30,11 @@ let $selectDep = $('#selectDep');
 let $btnInDanhSachTrongToaNha = $('#btnInDanhSachTrongToaNha');
 let arrOnSites = [];
 let arrFilteredOnSites = [];
+
+function showDepListJustAll(){
+  $('.selectDep').html('');
+  $('.selectDep').append(`<option value="0">Tất cả</option>`)
+}
 
 function showDepListWhenLoad(){
   let superDepID = $('#selectSuperDep').val();
@@ -39,7 +44,8 @@ function showDepListWhenLoad(){
 
 function showDepList(e, className){
   let superDepID = e.target.value;
-  let sentData = {iSuperDepartmentID: superDepID};
+  if(superDepID == 0) return showDepListJustAll();
+  let sentData = { iSuperDepartmentID: superDepID };
   SelectComponent.renderDepartment(sentData, className);
 }
 
@@ -90,7 +96,6 @@ function renderTblOnsiteList(data) {
 
 async function showOnSiteList() {
   arrOnSites = await UserService.getOnSite();
-
   if (!arrOnSites) {
     AlertSẻvice.showAlertError("Không có dữ liệu", '', 4000);
     arrFilteredOnSites = [];

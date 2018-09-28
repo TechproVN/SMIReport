@@ -45,10 +45,8 @@ function renderTblAttendance(data) {
     `
       <tr>
         <th class="trn">Tên</th>
-        <th class="trn">Chức vụ</th>
-        <th class="trn">Phòng ban</th>
-        <th class="trn">Vụ</th>
         <th class="trn">Ngày</th>
+        <th class="trn">Tháng</th>
         <th class="trn">Giờ vào </th>
         <th class="trn">Đi trễ (ph)</th>
         <th class="trn">Giờ ra </th>
@@ -58,20 +56,17 @@ function renderTblAttendance(data) {
   )
   if (data) {
     data.forEach((item) => {
-      const { dDate, dTimeIN, TimeIN, dTimeOut, TimeOut, sFirstName, sLastName, sDepartmentName, sPositionName, sSubDepartmentName, sSuperDepartmentName } = item;
+      const { dDay, dMonth, TimeIN, TimeOut, sFirstName, sLastName, sIdNumber } = item;
       let fullname = sFirstName + ' ' + sLastName;
       
       $tbody.append(`
         <tr>
           <td>${fullname}</td>
-          <td>${sPositionName}</td>
-          <td>${sDepartmentName}</td>
-          <td>${sSuperDepartmentName}</td>
-          <td>${dDate}</td>
+          <td>${dDay}</td>
           <td>${dTimeIN}</td>
           <td>${TimeIN}</td>
-          <td>${dTimeOut}</td>
           <td>${TimeOut}</td>
+          <td>${TimeIN}</td>
         </tr>
       `)
     })
@@ -82,19 +77,15 @@ function renderTblAttendance(data) {
 }
 
 async function showAttendance() {
-  let from = $('#fromDateTime').val();
-  let to = $('#toDateTime').val();
-  let { valid, msgErr } = ValidationService.checkDate(from, to);
-  if(!valid) return AlertService.showAlertError('', msgErr, 5000);
-  if(!ValidationService.checkTimeStartVsTimeEnd(from, to)) return AlertService.showAlertError("Ngày không họp lệ!!", "Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
-  let fromDate = TimeService.changeFormatDateTime(from);
-  let toDate = TimeService.changeFormatDateTime(to);
-  let sentData = {fromDate, toDate};
-  
-  let data = await UserService.getAttendance(sentData);
-  console.log(data);
-  if(!data) AlertService.showAlertError('Không có dữ liệu', '', 4000);
-  showPagination(data);
+  let iMonth = $('#selectMonth').val();
+  let iYear = $('#txtYear').val();
+  console.log(iYear);
+  if(!ValidationService.checkPositiveNumber(iYear)) return AlertService.showAlertSuccess('Năm không hợp lệ', '', 5000);
+  let sentData = { iMonth, iYear };
+  arrOnSites = await UserService.getAttendance(sentData);
+  console.log(arrOnSites);
+  if(!arrOnSites) AlertService.showAlertError('Không có dữ liệu', '', 4000);
+  showPagination(arrOnSites);
 }
 
 function showPagination(data){

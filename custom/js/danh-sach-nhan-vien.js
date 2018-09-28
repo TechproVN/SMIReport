@@ -60,14 +60,19 @@ let $btnUpdateUser = $('#btnUpdateUser');
 
 function showDepList(e, className, all){
   let superDepID = e.target.value;
+  if(superDepID == 0) return showDepListJustAll();
   let sentData = { iSuperDepartmentID: superDepID };
   SelectComponent.renderDepartment(sentData, className, all);
 }
 
+function showDepListJustAll(){
+  $('.selectDep').html('');
+  $('.selectDep').append(`<option value="0">Tất cả</option>`)
+}
+
 function showDepListWhenLoad(){
   let superDepID = $('#selectSuperDep').val();
-  let sentData = {iSuperDepartmentID: superDepID};
-  SelectComponent.renderDepartment(sentData, null, true);
+  showDepListJustAll();
 }
 
 function showUpdateModalUser(user){
@@ -127,7 +132,7 @@ function filterUserData(filterByDepID){
   let superDepID = $selectSuperDep.val();
   let arr1;
   if(filterByDepID) {
-    if(depID == 0) arr1 = FilterService.filterByUserSuperDepID(arrUsers, superDepID);
+    if(depID == 0 || !depID) arr1 = FilterService.filterByUserSuperDepID(arrUsers, superDepID);
     else arr1 = FilterService.filterByUserDepID(arrUsers, depID);
   }
   else 
