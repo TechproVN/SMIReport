@@ -38,37 +38,53 @@ function showDepListWhenLoad(){
 }
 
 function renderTblAttendance(data) {
-  let $table = $(`<table class="table table-hover table-striped table-condensed text-center custom-table"></table>`)
+  let $table = $(`<table class="table custom-table"></table>`)
   let $thead = $('<thead></thead>');
   let $tbody = $('<tbody></tbody>');
   $thead.html(
     `
       <tr>
-        <th class="trn">Tên</th>
-        <th class="trn">Ngày</th>
-        <th class="trn">Tháng</th>
-        <th class="trn">Giờ vào </th>
-        <th class="trn">Đi trễ (ph)</th>
-        <th class="trn">Giờ ra </th>
-        <th class="trn">Về sớm (ph)</th>
+        <th class="trn">STT</th>
+        <th class="trn">Họ Tên</th>
+        <th>Ra vào</th>
       </tr>
     `
   )
+  let arrMonthHeaders = getDayInMonth();
+  arrMonthHeaders.forEach(item => {
+    $thead.find('tr').append(`<th>${item}</th>`);
+  })
+
   if (data) {
-    data.forEach((item) => {
-      const { dDay, dMonth, TimeIN, TimeOut, sFirstName, sLastName, sIdNumber } = item;
-      let fullname = sFirstName + ' ' + sLastName;
-      
+    data.forEach((item, index) => {
+      let user = JSON.parse(item.TimeAttendanceAll);
+
+      let { sLogicalCode, sFullname, Attendance } = user;
+      let arrInOut = getInOutArr(Attendance);
+
       $tbody.append(`
         <tr>
-          <td>${fullname}</td>
-          <td>${dDay}</td>
-          <td>${dTimeIN}</td>
-          <td>${TimeIN}</td>
-          <td>${TimeOut}</td>
-          <td>${TimeIN}</td>
+          <td rowspan="2">${index + 1}</td>
+          <td rowspan="2">${sFullname}</td>
+          <td>Ra</td>
         </tr>
       `)
+      arrInOut.forEach(item => {
+        let val = item.dTimeIN;
+        if(!val) val = '';
+        $tbody.find('tr').last().append(`<td>${val}</td>`)
+      })
+
+      $tbody.append(`
+        <tr>
+          <td>Vào</td>
+        </tr>
+      `)
+      arrInOut.forEach(item => {
+        let val = item.dTimeOUT;
+        if(!val) val = '';
+        $tbody.find('tr').last().append(`<td>${val}</td>`)
+      })
     })
   }
 
@@ -76,10 +92,30 @@ function renderTblAttendance(data) {
   return $table;
 }
 
+function getInOutArr(data){
+  let arrTemp = [];
+  for(let i = 1; i <= 31; i++){
+    arrTemp.push({});
+  }
+  data.forEach(item => {
+    let { dTimeIN, dTimeOUT, dDate } = item;
+    arrTemp[Number(dDate) - 1] = { dTimeIN, dTimeOUT };
+  });
+  return arrTemp;
+}
+
+function getDayInMonth(){
+  let arr = [];
+  for(let i = 1; i <= 31; i++){
+    arr.push(i);
+  }
+  return arr;
+  
+}
+
 async function showAttendance() {
   let iMonth = $('#selectMonth').val();
   let iYear = $('#txtYear').val();
-  console.log(iYear);
   if(!ValidationService.checkPositiveNumber(iYear)) return AlertService.showAlertSuccess('Năm không hợp lệ', '', 5000);
   let sentData = { iMonth, iYear };
   arrOnSites = await UserService.getAttendance(sentData);
@@ -98,7 +134,7 @@ function showPagination(data){
     showGoButton: true,
     callback: function (data, pagination) {
       let $table = renderTblAttendance(data);
-      $('.card-chamCong .table-responsive').html($table);
+      $('#chamCongArea.table-responsive').html($table);
     }
   })
 }
