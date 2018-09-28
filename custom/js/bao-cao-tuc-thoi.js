@@ -1,4 +1,4 @@
-$(() => {
+$(async () => {
   $('#jstree_demo_div').jstree();
 
   $('#jstree_demo_div').on("changed.jstree", function (e, data) {
@@ -10,16 +10,45 @@ $(() => {
   $selectSuperDep.change(e => {
     showDepList(e);
   });
-  SelectComponent.renderSuperDepartment();
-  showDepListWhenLoad();
+
+  setDefaultStartEndTime();
+  setDefaultCheckDate();
+
+  await SelectComponent.renderSuperDepartment(null, true);
+  showDepListJustAll();
+  showOnSiteReport();
+  
 })
 
 let $selectSuperDep = $('#selectSuperDep');
 let $selectDep = $('#selectDep');
 let $txtCheckDate = $('#txtCheckDate');
+let $txtStartDate = $('#txtStartDate');
+let $txtEndDate = $('#txtEndDate');
 let $btnVIewOnsiteReportData = $('#btnVIewOnsiteReportData');
+
 let arrOnsiteReportData = [];
 let arrFilteredOnsiteReportData = [];
+
+function setDefaultStartEndTime(){
+  let d = new Date();
+  let h = d.getHours();
+  let m = d.getMinutes();
+  $txtStartDate.val('00:00');
+  let hour = h >= 10 ? h : '0' + h;
+  let min = m >= 10 ? m : '0' + m;
+  $txtEndDate.val(`${hour}:${min}`);
+}
+
+function setDefaultCheckDate(){
+  let { year, month, day } = TimeService.getCurrentDate();
+  month++;
+  let y = year >= 10 ? year : '0' + year;
+  let m = month >= 10 ? month : '0' + month;
+  let d = day >= 10 ? day : '0' + day;
+  $txtCheckDate.val(`${d}/${m}/${y}`);
+}
+
 
 
 function filterData(){
@@ -28,14 +57,14 @@ function filterData(){
 
 function showDepList(e, className){
   let superDepID = e.target.value;
+  if(superDepID == 0) return showDepListJustAll();
   let sentData = {iSuperDepartmentID: superDepID};
   SelectComponent.renderDepartment(sentData, className);
 }
 
-function showDepListWhenLoad(){
-  let superDepID = $('#selectSuperDep').val();
-  let sentData = {iSuperDepartmentID: superDepID};
-  SelectComponent.renderDepartment(sentData);
+function showDepListJustAll(){
+  $('.selectDep').html('');
+  $('.selectDep').append(`<option value="0">Tất cả</option>`)
 }
 
 async function showOnSiteReport(){
