@@ -58,13 +58,12 @@ function renderTblOnsiteList(data) {
   $thead.html(
     `
       <tr>
-        <th class="trn">Ho tên</th>
+        <th class="trn">STT</th>
         <th class="trn">Mã nhân viên</th>
-        <th class="trn">Chức vụ</th>
-        <th class="trn">Phòng ban</th>
+        <th class="trn">Họ tên</th>
         <th class="trn">Vụ</th>
-        <th class="trn">Bộ ĐK</th>
-        <th class="trn">Thời gian</th>
+        <th class="trn">Phòng ban</th>
+        <th class="trn">Chức vụ</th>
       </tr>
     `
   )
@@ -74,13 +73,12 @@ function renderTblOnsiteList(data) {
       let fullname = sFirstName + ' ' + sLastName;
       $tbody.append(`
         <tr>
-          <td>${fullname}</td>
+          <td>${index + 1}</td>
           <td>${sIdNumber}</td>
-          <td>${sPositionName}</td>
-          <td>${sDepartmentName}</td>
+          <td>${fullname}</td>
           <td>${sSuperDepartmentName}</td>
-          <td>${sSubDepartmentName}</td>
-          <td></td>
+          <td>${sDepartmentName}</td>
+          <td>${sPositionName}</td>
         </tr>
       `)
     })
