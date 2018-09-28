@@ -72,7 +72,7 @@ function renderTblAttendance(data) {
       $tbody.append(`
         <tr>
           <td rowspan="2">${index + 1}</td>
-          <td rowspan="2">${sFullname}</td>
+          <td rowspan="2">${sFullname} <br> ${sLogicalCode}</td>
           <td>Đi trễ</td>
         </tr>
       `)
@@ -80,7 +80,7 @@ function renderTblAttendance(data) {
         let val = '';
         if(item.dTimeIN)  {
           val = getTimeSpanString(item.dTimeIN, startStr);
-          if(!val) val = item.dTimeIN;
+          if(!val) val = '';
         }
         $tbody.find('tr').last().append(`<td>${val}</td>`)
       })
@@ -94,7 +94,7 @@ function renderTblAttendance(data) {
         let val = '';
         if(item.dTimeOUT)  {
           val = getTimeSpanString(endStr, item.dTimeOUT);
-          if(!val) val = item.dTimeOUT;
+          if(!val) val = '';
         }
         $tbody.find('tr').last().append(`<td>${val}</td>`)
       })

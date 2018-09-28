@@ -10,7 +10,6 @@ $(() => {
   $selectSuperDep.change(e => {
     showDepList(e);
   });
-  SelectComponent.renderMonths();
   SelectComponent.renderSuperDepartment();
   showDepListWhenLoad();
 })
@@ -24,7 +23,7 @@ let arrFilteredOnsiteReportData = [];
 
 
 function filterData(){
-  
+
 }
 
 function showDepList(e, className){
