@@ -121,4 +121,31 @@ class TimeService{
     return Math.ceil((((d-new Date(d.getFullYear(),0,1))/8.64e7)+1)/7);
   };
 
+  static checkLeapYear(year){
+    return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+  }
+
+  static getNumOfDayInMonth(month, year){
+    switch(month){
+      case 2: return (TimeService.checkLeapYear(year) ? 29 : 28);
+      case 1: case 3: case 5: case 7: case 8: case 10: case 12: return 31;
+      case 4: case 6: case 9: case 11: return 30;
+    }
+  }
+
+  static getDayInMonth(month, year){
+    let arr = [];
+    let l = TimeService.getNumOfDayInMonth(month, year);
+    for(let i = 1; i <= l; i++){
+      arr.push(i);
+    }
+    return arr;
+  }
+
+  static checkWeekendInMonth(year, month, day){
+    let d = new Date(year, month - 1, day);
+    let dayInWeek = d.getDay();
+    return dayInWeek == 0 || dayInWeek == 6;
+  }
+
 }

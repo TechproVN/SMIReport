@@ -42,6 +42,7 @@ let $btnViewAttendance = $('#btnViewAttendance');
 let arrOnSites = [];
 let arrFilteredOnSites = [];
 
+
 function filterUserData(filterByDep){
   let depID = $selectDep.val();
   let superDepID = $selectSuperDep.val();
@@ -67,6 +68,14 @@ function renderTblAttendance(data) {
   let $table = $(`<table class="table custom-table"></table>`)
   let $thead = $('<thead></thead>');
   let $tbody = $('<tbody></tbody>');
+  renderTheadAttendance($thead);
+  if(data) renderTbodyAttendance(data, $tbody);
+
+  $table.append($thead).append($tbody);
+  return $table;
+}
+
+function renderTheadAttendance($thead){
   $thead.html(
     `
       <tr>
@@ -76,58 +85,72 @@ function renderTblAttendance(data) {
       </tr>
     `
   )
-  let arrMonthHeaders = getDayInMonth();
+  let m = +$selectMonth.val();
+  let y = +$txtYear.val();
+  let arrMonthHeaders = TimeService.getDayInMonth(m, y);
   arrMonthHeaders.forEach(item => {
-    $thead.find('tr').append(`<th>${item}</th>`);
+    let className = getClassNameHighLightCol(y, m, item);
+    $thead.find('tr').append(`<th class=${className}>${item}</th>`);
   })
+}
 
-  if (data) {
-    data.forEach((item, index) => {
-      let user = JSON.parse(item.TimeAttendanceAll);
+function renderTbodyAttendance(data, $tbody){
+  let m = +$selectMonth.val();
+  let y = +$txtYear.val();
+  data.forEach((item, index) => {
+    let user = JSON.parse(item.TimeAttendanceAll);
 
-      let { sLogicalCode, sFullname, Attendance } = user;
-      let arrInOut = getInOutArr(Attendance);
-      let startStr = $txtStartTime.val();
-      let endStr = $txtEndTime.val();
-      $tbody.append(`
-        <tr>
-          <td rowspan="2">${index + 1}</td>
-          <td rowspan="2">${sFullname} <br> ${sLogicalCode}</td>
-          <td>Đi trễ</td>
-        </tr>
-      `)
-      arrInOut.forEach(item => {
-        let val = '';
-        if(item.dTimeIN)  {
-          val = getTimeSpanString(item.dTimeIN, startStr);
-          if(!val) val = '';
-        }
-        $tbody.find('tr').last().append(`<td>${val}</td>`)
-      })
-
-      $tbody.append(`
-        <tr>
-          <td>Về sớm</td>
-        </tr>
-      `)
-      arrInOut.forEach(item => {
-        let val = '';
-        if(item.dTimeOUT)  {
-          val = getTimeSpanString(endStr, item.dTimeOUT);
-          if(!val) val = '';
-        }
-        $tbody.find('tr').last().append(`<td>${val}</td>`)
-      })
+    let { sLogicalCode, sFullname, Attendance } = user;
+    let arrInOut = getInOutArr(Attendance);
+    let startStr = $txtStartTime.val();
+    let endStr = $txtEndTime.val();
+    $tbody.append(`
+      <tr>
+        <td rowspan="2">${index + 1}</td>
+        <td rowspan="2">${sFullname} <br> ${sLogicalCode}</td>
+        <td>Đi trễ</td>
+      </tr>
+    `)
+    arrInOut.forEach((item, index) => {
+      let val = '';
+      if(item.dTimeIN)  {
+        val = getTimeSpanString(item.dTimeIN, startStr);
+        if(!val) val = '';
+      }
+      let className = getClassNameHighLightCol(y, m, index + 1);
+      $tbody.find('tr').last().append(`<td class="${className}">${val}</td>`)
     })
-  }
 
-  $table.append($thead).append($tbody);
-  return $table;
+    $tbody.append(`
+      <tr>
+        <td>Về sớm</td>
+      </tr>
+    `)
+    arrInOut.forEach((item, index) => {
+      let val = '';
+      if(item.dTimeOUT)  {
+        val = getTimeSpanString(endStr, item.dTimeOUT);
+        if(!val) val = '';
+      }
+      let className = getClassNameHighLightCol(y, m, index + 1);
+      $tbody.find('tr').last().append(`<td class="${className}">${val}</td>`)
+    })
+  })
+}
+
+function getClassNameHighLightCol(y, m, d){
+  let weekend = TimeService.checkWeekendInMonth(y, m, d);
+  let className = '';
+  if(weekend) className = 'highlight-td-th';
+  return className;
 }
 
 function getInOutArr(data){
   let arrTemp = [];
-  for(let i = 1; i <= 31; i++){
+  let m = +$selectMonth.val();
+  let y = +$txtYear.val();
+  let l = TimeService.getNumOfDayInMonth(m, y);
+  for(let i = 1; i <= l; i++){
     arrTemp.push({});
   }
   data.forEach(item => {
@@ -162,14 +185,6 @@ function getTimeStringFromSeconds(sec){
   if(sec < 60*60*24) return Math.floor(sec/3600) + ':' + (sec%3600)/60;
 }
 
-function getDayInMonth(){
-  let arr = [];
-  for(let i = 1; i <= 31; i++){
-    arr.push(i);
-  }
-  return arr;
-}
-
 async function showAttendance() {
   let iMonth = $('#selectMonth').val();
   let iYear = $('#txtYear').val();
@@ -196,31 +211,20 @@ async function showAttendance() {
 function checkTimeInOutInput(start, end){
   let valid = true;
   let errMsg = '';
-  if(!checkFormatInOutTimeStr(start)){
+  if(!ValidationService.checkFormatTimeStr(start)){
     valid = false;
     errMsg += 'Thời gian làm bắt đầu không họp lệ\n';
   }
-  if(!checkFormatInOutTimeStr(end)){
+  if(!ValidationService.checkFormatTimeStr(end)){
     valid = false;
     errMsg += 'Thời gian làm kết thúc không họp lệ\n';
   }
   return { valid, errMsg };
 }
 
-function checkFormatInOutTimeStr(timeStr){
-  let pattern = /^[0-9]{1,2}:[0-9]{1,2}$/;
-  if(!pattern.test(timeStr)) return false;
-  let arr = timeStr.split(':');
-  let hour = Number(arr[0]);
-  let min = Number(arr[1]);
-  if(hour > 23) return false;
-  if(min > 59) return false;
-  return true;
-}
-
 function showPagination(data){
   if(!data) return clearPagination();
-  $('#pagingTotal').html(`<strong>Tổng số dòng:</strong> ${data.length}`)
+  $('#pagingTotal').html(`<strong>Tổng số nhân viên:</strong> ${data.length}`)
   $('#pagingControl').pagination({
     dataSource: data,
     pageSize: 10,

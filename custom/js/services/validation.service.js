@@ -38,4 +38,16 @@ class ValidationService{
     if(Number(val) < 0) return false;
     return true;
   }
+
+  //hh:mm
+  static checkFormatTimeStr(timeStr){
+    let pattern = /^[0-9]{1,2}:[0-9]{1,2}$/;
+    if(!pattern.test(timeStr)) return false;
+    let arr = timeStr.split(':');
+    let hour = Number(arr[0]);
+    let min = Number(arr[1]);
+    if(hour > 23) return false;
+    if(min > 59) return false;
+    return true;
+  }
 }
