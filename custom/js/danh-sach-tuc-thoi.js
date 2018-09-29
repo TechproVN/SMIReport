@@ -52,6 +52,7 @@ function showDepList(e, className){
 function filterUserData(filterByDepID){
   let depID = $selectDep.val();
   let superDepID = $selectSuperDep.val();
+  if(!arrOnSites) return;
   if(filterByDepID) arrFilteredOnSites = FilterService.filterByUserDepID(arrOnSites, depID);
   else arrFilteredOnSites = FilterService.filterByUserSuperDepID(arrOnSites, superDepID);
   showPagination(arrFilteredOnSites);
@@ -97,10 +98,10 @@ function renderTblOnsiteList(data) {
 async function showOnSiteList() {
   arrOnSites = await UserService.getOnSite();
   if (!arrOnSites) {
-    AlertSẻvice.showAlertError("Không có dữ liệu", '', 4000);
+    AlertService.showAlertError("Không có dữ liệu", '', 4000);
     arrFilteredOnSites = [];
   }
-  arrFilteredOnSites = arrOnSites.slice();
+  else arrFilteredOnSites = arrOnSites.slice();
   showPagination(arrOnSites);
 }
 
@@ -162,6 +163,7 @@ function renderTblPrintOnsiteList(data){
 }
 
 function printUserList(){
+  if(!arrFilteredOnSites || arrFilteredOnSites.length == 0) return AlertService.showAlertError('Không có dữ liệu để in', '', 5000);
   renderTblPrintOnsiteList(arrFilteredOnSites);
   // $('#modalPrintUsers').modal('show');
   let $table = $('#tblPrintUsers');

@@ -6,26 +6,32 @@ $(async () => {
   });
 
   $btnVIewOnsiteReportData.click(showOnSiteReport);
-
+  $btnPrintOnsiteReportData.click(printOnsiteReportData);
+  
   $selectSuperDep.change(e => {
     showDepList(e);
+    filterData(false);
   });
+
+  $selectDep.change(() => {
+    filterData(true);
+  })
 
   setDefaultStartEndTime();
   setDefaultCheckDate();
-
-  await SelectComponent.renderSuperDepartment(null, true);
   showDepListJustAll();
   showOnSiteReport();
-  
+  SelectComponent.renderSuperDepartment(null, true);
+
 })
 
 let $selectSuperDep = $('#selectSuperDep');
 let $selectDep = $('#selectDep');
 let $txtCheckDate = $('#txtCheckDate');
-let $txtStartDate = $('#txtStartDate');
-let $txtEndDate = $('#txtEndDate');
+let $txtStartTime = $('#txtStartTime');
+let $txtEndTime = $('#txtEndTime');
 let $btnVIewOnsiteReportData = $('#btnVIewOnsiteReportData');
+let $btnPrintOnsiteReportData = $('#btnPrintOnsiteReportData');
 
 let arrOnsiteReportData = [];
 let arrFilteredOnsiteReportData = [];
@@ -34,10 +40,10 @@ function setDefaultStartEndTime(){
   let d = new Date();
   let h = d.getHours();
   let m = d.getMinutes();
-  $txtStartDate.val('00:00');
+  $txtStartTime.val('00:00');
   let hour = h >= 10 ? h : '0' + h;
   let min = m >= 10 ? m : '0' + m;
-  $txtEndDate.val(`${hour}:${min}`);
+  $txtEndTime.val(`${hour}:${min}`);
 }
 
 function setDefaultCheckDate(){
@@ -49,10 +55,13 @@ function setDefaultCheckDate(){
   $txtCheckDate.val(`${d}/${m}/${y}`);
 }
 
-
-
-function filterData(){
-
+function filterData(filterByDep){
+  let depID = $selectDep.val();
+  let superDepID = $selectSuperDep.val();
+  if(!arrOnsiteReportData || arrOnsiteReportData.length == 0) return;
+  if(filterByDep) arrFilteredOnsiteReportData = FilterService.filterByDep(arrOnsiteReportData, depID);
+  else arrFilteredOnsiteReportData = FilterService.filterBySuperDep(arrOnsiteReportData, superDepID);
+  showPagination(arrFilteredOnsiteReportData);
 }
 
 function showDepList(e, className){
@@ -69,12 +78,16 @@ function showDepListJustAll(){
 
 async function showOnSiteReport(){
   let date = $txtCheckDate.val();
-  if(date == '' || date == undefined) return AlertService.showAlertError('Ngày kiểm tra không họp lệ', 'Vui lòng nhập lại ngày kiểm tra');
+  if(date == '' || !date) return AlertService.showAlertError('Ngày kiểm tra không họp lệ', 'Vui lòng nhập lại ngày kiểm tra');
   let dDate = TimeService.changeFormatDateTime(date);
   let sentData = { dDate };
   arrOnsiteReportData = await UserService.getOnSiteDate(sentData);
-  if(!arrOnsiteReportData) AlertService.showAlertError('Không có dữ liệu', '', 5000);
-  console.log(arrOnsiteReportData);
+  if(!arrOnsiteReportData) {
+    AlertService.showAlertError('Không có dữ liệu', '', 5000);
+    arrFilteredOnsiteReportData = [];
+  }else{
+    arrFilteredOnsiteReportData = arrOnsiteReportData.slice();
+  }
   showPagination(arrOnsiteReportData);
 }
 
@@ -137,4 +150,51 @@ function clearPagination(){
   $('#pagingTotal').html('');
   $('#pagingControl').html('');
   $('#ÓniteReportDataArea').html('');
+}
+
+function renderTblPrintOnsiteReport(data){
+  let $table = $(`#tblPrintOnsiteReport`);
+  $table.html('');
+  let $thead = $('<thead></thead>');
+  let $tbody = $('<tbody></tbody>');
+  $thead.html(
+    `
+    <tr>
+      <th class="trn">STT</th>
+      <th class="trn">Họ Tên</th>
+      <th>Mã nhân viên</th>
+      <th>Vị trí</th>
+      <th>Phòng ban</th>
+      <th>Vụ</th>
+      <th></th>
+    </tr>
+    `
+  )
+  if (data) {
+    data.forEach((user, index) => {
+      const { sLastName, sFirstName, sIdNumber, sPositionName, sDepartmentName, sSuperDepartmentName, sSubDepartmentName } = user;
+      let fullname = sFirstName + ' ' + sLastName;
+      $tbody.append(`
+        <tr>
+          <td>${index + 1}</td>
+          <td>${sIdNumber}</td>
+          <td>${fullname}</td>
+          <td>${sSuperDepartmentName}</td>
+          <td>${sDepartmentName}</td>
+          <td>${sPositionName}</td>
+        </tr>
+      `)
+    })
+  }
+
+  $table.append($thead).append($tbody);
+}
+
+function printOnsiteReportData(){
+  let arr = arrFilteredOnsiteReportData;
+  if(!arr || arr.length == 0) return AlertService.showAlertError('Không có dữ liệu để in', '', 4000);
+  renderTblPrintOnsiteReport(arrFilteredOnsiteReportData);
+  let $table = $('#tblPrintOnsiteReport');
+  let filename = "bao-cao-tuc-thoi";
+  Export2ExcelService.export2Excel($table, filename);
 }

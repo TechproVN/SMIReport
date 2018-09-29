@@ -6,41 +6,61 @@ $(async () => {
     console.log(data.selected);
   });
 
-  $('#btnViewAttendance').click(showAttendance);
-  
+  $btnViewAttendance.click(showAttendance);
+  $btnPrintAttendance.click(printAttendanceData);
   $selectSuperDep.change(e => {
     showDepList(e);
-    setTimeout(() => {
-      filterUserData();
-    }, 200);
+    // filterUserData(false);
   });
+
+  $selectDep.change(() => {
+    // filterUserData(true);
+  })
+
+  SelectComponent.renderMonths();
 
   $txtEndTime.val('17:00');
   $txtStartTime.val('08:00');
-
-  SelectComponent.renderMonths();
-  await SelectComponent.renderSuperDepartment();
+  $txtYear.val(new Date().getFullYear());
+  $selectMonth.val(new Date().getMonth() + 1);
+  
+  showDepListJustAll();
   SelectComponent.renderPosition();
-  showDepListWhenLoad();
-
+  SelectComponent.renderSuperDepartment(null, true);
+  showAttendance();
 })
 
 let $selectSuperDep = $('#selectSuperDep');
 let $selectDep = $('#selectDep');
+let $selectMonth = $('#selectMonth');
 let $txtEndTime = $('#txtEndTime');
 let $txtStartTime = $('#txtStartTime');
+let $txtYear = $('#txtYear');
+let $btnPrintAttendance = $('#btnPrintAttendance');
+let $btnViewAttendance = $('#btnViewAttendance');
+
 let arrOnSites = [];
+let arrFilteredOnSites = [];
+
+function filterUserData(filterByDep){
+  let depID = $selectDep.val();
+  let superDepID = $selectSuperDep.val();
+  if(!arrOnSites || arrOnSites.length == 0) return;
+  if(filterByDep) arrFilteredOnSites = FilterService.filterByDep(depID);
+  else arrFilteredOnSites = FilterService.filterBySuperDep(superDepID);
+  showPagination(arrFilteredOnSites);
+}
+
+function showDepListJustAll(){
+  $('.selectDep').html('');
+  $('.selectDep').append(`<option value="0">Tất cả</option>`)
+}
 
 function showDepList(e, className){
   let superDepID = e.target.value;
+  if(superDepID == 0) return showDepListJustAll();
   let sentData = {iSuperDepartmentID: superDepID};
   SelectComponent.renderDepartment(sentData, className);
-}
-
-function showDepListWhenLoad(){
-  let superDepID = $('#selectSuperDep').val();
-  let sentData = {iSuperDepartmentID: superDepID};
-  SelectComponent.renderDepartment(sentData);
 }
 
 function renderTblAttendance(data) {
@@ -164,7 +184,12 @@ async function showAttendance() {
   let sentData = { iMonth, iYear };
   arrOnSites = await UserService.getAttendance(sentData);
   console.log(arrOnSites);
-  if(!arrOnSites) AlertService.showAlertError('Không có dữ liệu', '', 4000);
+  
+  if(!arrOnSites) {
+    AlertService.showAlertError('Không có dữ liệu', '', 4000);
+    arrFilteredOnSites = [];
+  }
+  else arrFilteredOnSites = arrOnSites.slice();
   showPagination(arrOnSites);
 }
 
@@ -212,6 +237,13 @@ function clearPagination(){
   $('#pagingTotal').html('');
   $('#pagingControl').html('');
   $('#chamCongArea').html('');
+}
+
+function printAttendanceData(){
+  if(!arrFilteredOnSites || arrFilteredOnSites.length == 0) return AlertService.showAlertError('Không có dữ liệu để in', '', 5000);
+  let $table = renderTblAttendance(arrFilteredOnSites);
+  let filename = "danh-sach-cham-cong";
+  Export2ExcelService.export2Excel($table, filename);
 }
 
 

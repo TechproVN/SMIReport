@@ -54,17 +54,17 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="danh-sach-tuc-thoi.html">
-                  <i class="fa fa-th-list"></i> Danh sách tức thòi
+                  <i class="fa fa-th-list"></i> Danh sách tức thời
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="cham-cong-nhan-vien.html">
-                  <i class="fa fa-star"></i> Báo cáo thòi gian ra vào
+                  <i class="fa fa-star"></i> Báo cáo thời gian ra vào
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="bao-cao-tuc-thoi.html">
-                  <i class="fa fa-star"></i> Báo cáo tức thòi
+                  <i class="fa fa-star"></i> Báo cáo tức thời
                 </a>
               </li>
             </ul>
@@ -135,11 +135,11 @@
                           <div class="row">
                             <div class="col">
                               <label class="font-weight-bold">Từ giờ</label>
-                              <input type="text" class="form-control form-control-sm" placeholder="Nhập giờ" id="txtStartDate">
+                              <input type="text" class="form-control form-control-sm" placeholder="hh:mm" id="txtStartTime">
                             </div>
                             <div class="col">
                               <label class="font-weight-bold">Đến giờ</label>
-                              <input type="text" class="form-control form-control-sm" placeholder="Nhập giờ" id="txtEndDate">
+                              <input type="text" class="form-control form-control-sm" placeholder="hh:mm" id="txtEndTime">
                             </div>
                           </div>
                         </div>
@@ -161,6 +161,7 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <button class="btn btn-custom bg-main-color mt-4" id="btnVIewOnsiteReportData">Xem</button>
+                        <button class="btn btn-custom bg-main-color mt-4" id="btnPrintOnsiteReportData">IN báo cáo</button>
                       </div>
                     </div>
                   </div>
@@ -187,6 +188,39 @@
         </div>
       </div>
     </div>
+
+  <!-- modal print users -->
+  <div class="row">
+    <div class="col-12">
+      <div class="modal fade" id="modalPrintUsers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title trn"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-striped table-condensed text-center custom-table" id="tblPrintOnsiteReport">
+                      
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-custom bg-main-color trn" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
   
 
 
@@ -213,6 +247,9 @@
   
   <!-- sweetalert js -->
   <script src="../plugins/sweetalert/js/sweetalert.min.js"></script>
+
+  <!-- export2Excel js -->
+  <script src="../plugins/Export-Html-Table-To-Excel-Spreadsheet-using-jQuery-table2excel/dist/jquery.table2excel.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
 
