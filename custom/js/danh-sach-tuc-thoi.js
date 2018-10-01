@@ -8,7 +8,9 @@ $(async () => {
 
   $selectSuperDep.change(e => {
     showDepList(e);
-    filterUserData(false);
+    setTimeout(() => {
+      filterUserData(false);
+    }, 100);
   });
 
   $selectDep.change(() => {
@@ -46,12 +48,13 @@ function showDepList(e, className){
   let superDepID = e.target.value;
   if(superDepID == 0) return showDepListJustAll();
   let sentData = { iSuperDepartmentID: superDepID };
-  SelectComponent.renderDepartment(sentData, className);
+  SelectComponent.renderDepartment(sentData, className, true);
 }
 
 function filterUserData(filterByDepID){
   let depID = $selectDep.val();
   let superDepID = $selectSuperDep.val();
+  console.log(depID, superDepID);
   if(!arrOnSites) return;
   if(filterByDepID) arrFilteredOnSites = FilterService.filterByUserDepID(arrOnSites, depID);
   else arrFilteredOnSites = FilterService.filterByUserSuperDepID(arrOnSites, superDepID);
@@ -102,6 +105,7 @@ async function showOnSiteList() {
     arrFilteredOnSites = [];
   }
   else arrFilteredOnSites = arrOnSites.slice();
+  console.log(arrOnSites);
   showPagination(arrOnSites);
 }
 

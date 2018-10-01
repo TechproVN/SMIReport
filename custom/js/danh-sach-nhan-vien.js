@@ -38,6 +38,7 @@ $(async () => {
   showDepListWhenLoad();
   
   showEmployeesListTable();
+  console.log(CommonService.removeUnicode('Lê Văn Sơn').toLowerCase())
 
 })
 
@@ -185,8 +186,12 @@ function renderTblInOutList(data){
 
 async function showEmployeesListTable(){
   arrUsers = await UserService.getUsersData();
-  if(!arrUsers) AlertService.showAlertError('Không có dữ liệu', '', 4000);
+  if(!arrUsers) {
+    AlertService.showAlertError('Không có dữ liệu', '', 4000);
+    arrFilteredUsers = [];
+  }
   else arrFilteredUsers = arrUsers.slice();
+  // console.log(arrUsers)
   showPagination(arrUsers);
 }
 

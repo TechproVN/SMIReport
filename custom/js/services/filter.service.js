@@ -4,9 +4,14 @@ class FilterService{
     if(!ValidationService.checkNotEmpty(filterVal)) return arr;
     return arr.filter(user => {
       let {sLastName, sFirstName} = user;
-      let fullname = sFirstName + ' ' + sLastName;
-      fullname = CommonService.removeUnicode(fullname).toLowerCase();
+      sFirstName = VNAccents.removeAccents(sFirstName).toLowerCase();
+      sLastName = VNAccents.removeAccents(sLastName).toLowerCase();
+      // console.log(sFirstName, sLastName);
+      let fullname = sFirstName.trim() + ' ' + sLastName.trim();
+      // console.log(fullname);
+      // console.log(fullname);
       filterVal = CommonService.removeUnicode(filterVal).toLowerCase();
+      // console.log(user.fullname);
       return fullname.indexOf(filterVal) > -1;
     })
   }
