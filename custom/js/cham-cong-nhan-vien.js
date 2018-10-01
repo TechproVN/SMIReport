@@ -186,7 +186,7 @@ function getTimeStringFromSeconds(sec){
     h = 0;
     m = Math.floor(sec/60);
   }
-  else if(sec < 60*60*24) {
+  else if(sec >= 60*60) {
     h = Math.floor(sec/3600);
     m = Math.floor((sec%3600)/60);
   }
