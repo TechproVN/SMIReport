@@ -176,12 +176,12 @@ function getTimeSpanString(timeStr1, timeStr2){
   let stamp1 = getTimeOfTimeStr(timeStr1);
   let stamp2 = getTimeOfTimeStr(timeStr2);
   let span = stamp1 - stamp2;
-  if(span <= 60) return null;
+  if(span < 60) return null;
   return getTimeStringFromSeconds(span);
 }
 
 function getTimeStringFromSeconds(sec){
-  if(sec < 60*60) return '00:' + sec/60;
+  if(sec < 60*60) return '00:' + Math.floor(sec/60);
   if(sec < 60*60*24) return Math.floor(sec/3600) + ':' + (sec%3600)/60;
 }
 
