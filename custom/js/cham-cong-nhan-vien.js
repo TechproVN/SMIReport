@@ -181,8 +181,16 @@ function getTimeSpanString(timeStr1, timeStr2){
 }
 
 function getTimeStringFromSeconds(sec){
-  if(sec < 60*60) return '00:' + Math.floor(sec/60);
-  if(sec < 60*60*24) return Math.floor(sec/3600) + ':' + (sec%3600)/60;
+  let h, m;
+  if(sec < 60*60) {
+    h = 0;
+    m = Math.floor(sec/60);
+  }
+  else if(sec < 60*60*24) {
+    h = Math.floor(sec/3600);
+    m = Math.floor((sec%3600)/60);
+  }
+  return (h >= 10 ? h : `0${h}`) + ':' + (m >= 10 ? m : `0${m}`);
 }
 
 async function showAttendance() {
