@@ -27,15 +27,7 @@
   <!-- main view custom css -->
   <link rel="stylesheet" href="../custom/css/main.css">
 
-  <style>
-    @media(max-width: 760px){
-      #btnInDanhSachTrongToaNha{
-        margin-top: 0!important;
-      }
-    }
-    
-  </style>
-  <title>Danh sách tức thời</title>
+  <title>Thiết lập vụ</title>
 
 </head>
 
@@ -78,14 +70,14 @@
     </nav>
 
     <header class="mt-4" style="padding-left: 40px">
-        <div class="container-fluid">
-            <div class="row">
-              <div class="col-12">
-                <img src="../img/banner-ngan-hang-nha-nuoc.png" alt="" class="img-fluid">
-              </div>
+      <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <img src="../img/banner-ngan-hang-nha-nuoc.png" alt="" class="img-fluid">
             </div>
-        </div>
-      </header>
+          </div>
+      </div>
+    </header>
 
       
     <div class="wrapper mt-3">
@@ -125,37 +117,67 @@
             <div class="col-12">
               <div class="card card-chamCong">
                 <div class="card-header bg-main-color custom-card-header">
-                  <h4>
-                    <i class="fa fa-exclamation-triangle"></i> Danh sách tức thời
-                  </h4>
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h4>
+                        <i class="fa fa-exclamation-triangle"></i> Thiết lập vụ
+                      </h4>
+                    </div>
+                    <div class="col-md-4">
+                      <button class="btn btn-custom border-radius-custom pull-right">Thêm vụ</button>
+                    </div>
+                  </div>
                 </div>
                 <div class="card-body custom-card-body">
-                  
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label class="font-weight-bold">Vụ</label>
-                        <select class="form-control form-control-sm selectSuperDep custom-input" id="selectSuperDep">
-                          
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label class="font-weight-bold">Phòng</label>
-                        <select class="form-control form-control-sm selectDep custom-input" id="selectDep">
-                          
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <button class="btn btn-custom border-radius-custom" style="margin-top: 27px; text-transform: none; background-color: #414a59;" id="btnInDanhSachTrongToaNha">In danh sách có trong tòa nhà</button>
-                    </div>
-                    
-                  </div>
 
-                  <div class="table-responsive" id="onSiteListArea">
-                      
+                  <div class="table-responsive" id="depDataArea">
+                    <table class="table table-hover table-striped table-condensed text-center custom-table">
+                      <thead>
+                        <tr>
+                          <th class="font-weight-bold">STT</th>
+                          <th class="font-weight-bold">Header 1</th>
+                          <th class="font-weight-bold">Header 2</th>
+                          <th class="font-weight-bold">Header 3</th>
+                          <th class="font-weight-bold">Header 4</th>
+                          <th class="font-weight-bold"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Header 1</td>
+                          <td>Header 2</td>
+                          <td>Header 3</td>
+                          <td>Header 4</td>
+                          <td>
+                            <button class="btn btn-custom border-radius-custom bg-main-color">Cập nhật</button>
+                            <button class="btn btn-custom border-radius-custom" style="background-color: #6785b2">Xóa</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Header 1</td>
+                          <td>Header 2</td>
+                          <td>Header 3</td>
+                          <td>Header 4</td>
+                          <td>
+                            <button class="btn btn-custom border-radius-custom bg-main-color">Cập nhật</button>
+                            <button class="btn btn-custom border-radius-custom" style="background-color: #6785b2">Xóa</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Header 1</td>
+                          <td>Header 2</td>
+                          <td>Header 3</td>
+                          <td>Header 4</td>
+                          <td>
+                            <button class="btn btn-custom border-radius-custom bg-main-color">Cập nhật</button>
+                            <button class="btn btn-custom border-radius-custom" style="background-color: #6785b2">Xóa</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
 
                   <!-- pagination -->

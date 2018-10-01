@@ -179,6 +179,19 @@ nav.navbar{
 .card-body{
   padding: 5px !important;
 }
+.custom-input{
+  /* border-radius: 15px; */
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+.custom-input:focus{
+  /* border: none; */
+  border: 1px solid green!important;
+  box-shadow: none;
+}
+.border-radius-custom{
+  border-radius: 15px!important;
+}
 .mymap{
   height: 400px;
   width: 100%;
