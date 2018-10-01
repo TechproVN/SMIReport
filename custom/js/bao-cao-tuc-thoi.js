@@ -59,8 +59,10 @@ function filterData(filterByDep){
   let depID = $selectDep.val();
   let superDepID = $selectSuperDep.val();
   if(!arrOnsiteReportData || arrOnsiteReportData.length == 0) return;
-  if(filterByDep) arrFilteredOnsiteReportData = FilterService.filterByDep(arrOnsiteReportData, depID);
-  else arrFilteredOnsiteReportData = FilterService.filterBySuperDep(arrOnsiteReportData, superDepID);
+  let arr = FilterService.filterByUserSuperDepID(arrOnsiteReportData,superDepID);
+  if(filterByDep) 
+    arrFilteredOnsiteReportData = FilterService.filterByUserDepID(arr, depID);
+  else arrFilteredOnsiteReportData = arr;
   showPagination(arrFilteredOnsiteReportData);
 }
 
@@ -68,7 +70,7 @@ function showDepList(e, className){
   let superDepID = e.target.value;
   if(superDepID == 0) return showDepListJustAll();
   let sentData = {iSuperDepartmentID: superDepID};
-  SelectComponent.renderDepartment(sentData, className);
+  SelectComponent.renderDepartment(sentData, className, true);
 }
 
 function showDepListJustAll(){

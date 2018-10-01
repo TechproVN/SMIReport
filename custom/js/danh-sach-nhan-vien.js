@@ -191,7 +191,6 @@ async function showEmployeesListTable(){
     arrFilteredUsers = [];
   }
   else arrFilteredUsers = arrUsers.slice();
-  // console.log(arrUsers)
   showPagination(arrUsers);
 }
 

@@ -54,10 +54,10 @@ function showDepList(e, className){
 function filterUserData(filterByDepID){
   let depID = $selectDep.val();
   let superDepID = $selectSuperDep.val();
-  console.log(depID, superDepID);
   if(!arrOnSites) return;
-  if(filterByDepID) arrFilteredOnSites = FilterService.filterByUserDepID(arrOnSites, depID);
-  else arrFilteredOnSites = FilterService.filterByUserSuperDepID(arrOnSites, superDepID);
+  let arr1 = FilterService.filterByUserSuperDepID(arrOnSites, superDepID);
+  if(filterByDepID) arrFilteredOnSites = FilterService.filterByUserDepID(arr1, depID);
+  else arrFilteredOnSites = arr1;
   showPagination(arrFilteredOnSites);
 }
 

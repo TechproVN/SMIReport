@@ -57,6 +57,7 @@ class VNAccents {
   }
 
   static removeAccents(string) {
+    if(!ValidationService.checkNotEmpty(string)) return '';
     return string
       .split("")
       .map((letter, index) => {
